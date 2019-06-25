@@ -130,6 +130,7 @@ dependencies {
     // Dagger
     implementation "com.google.dagger:dagger:$dagger_version"
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
@@ -146,6 +147,7 @@ dependencies {
     // Mockito inline adds support for mocking final classes and methods
     testImplementation "org.assertj:assertj-core:$assertj_version"
     testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version"
+
 
     //ButterKnife
     implementation "com.jakewharton:butterknife:$butterknife"

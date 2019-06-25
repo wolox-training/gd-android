@@ -72,6 +72,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
      */
     public void setListeners() {
         vEmailInput.addTextChangedListener(new TextWatcher() {
+
             @OnTextChanged
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
