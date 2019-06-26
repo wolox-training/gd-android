@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -12,18 +11,16 @@
         android:gravity="center"
         android:orientation="vertical">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/spacing_none"
-                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/login_basic_weight"
                 android:gravity="top|center_horizontal"
                 android:scaleType="centerCrop"
                 android:src="@drawable/wolox_banner" />
@@ -38,14 +35,13 @@
                 android:hint="@string/login_email"
                 android:textAlignment="viewStart" />
 
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/vPasswordInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/spacing_large"
-                android:layout_marginRight="@dimen/spacing_large"
                 android:layout_marginTop="@dimen/spacing_large"
+                android:layout_marginRight="@dimen/spacing_large"
                 android:hint="@string/login_pass"
                 android:inputType="textPassword"
                 android:textAlignment="viewStart" />
@@ -55,12 +51,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/spacing_large"
-                android:layout_marginRight="@dimen/spacing_large"
                 android:layout_marginTop="@dimen/spacing_large_extra"
-                android:padding="@dimen/spacing_large"
+                android:layout_marginRight="@dimen/spacing_large"
                 android:background="@color/white"
-                android:elevation="5dp"
-                android:shadowRadius="2"
+                android:elevation="@dimen/spacing_large"
+                android:padding="@dimen/spacing_large"
                 android:text="@string/login_btn_login"
                 android:textColor="@color/black" />
 
@@ -69,10 +64,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/spacing_large"
-                android:layout_marginRight="@dimen/spacing_large"
                 android:layout_marginTop="@dimen/spacing_large"
-                android:padding="@dimen/spacing_large"
+                android:layout_marginRight="@dimen/spacing_large"
                 android:background="@color/colorPrimary"
+                android:padding="@dimen/spacing_large"
                 android:text="@string/login_btn_signup"
                 android:textColor="@color/white" />
 
@@ -82,17 +77,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/spacing_large"
                 android:layout_marginRight="@dimen/spacing_large"
-                android:layout_weight="1"
+                android:layout_weight="@dimen/login_basic_weight"
                 android:gravity="bottom|center_horizontal"
                 android:text="@string/agree_terms"
-                android:textSize="@dimen/font_medium_extra"
                 android:textColor="@color/gray"
-                android:textColorLink="@color/gray"/>
+                android:textColorLink="@color/gray"
+                android:textSize="@dimen/font_medium_extra" />
 
         </LinearLayout>
 
-
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
