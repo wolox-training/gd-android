@@ -74,9 +74,10 @@
                 android:padding="@dimen/spacing_large"
                 android:background="@color/colorPrimary"
                 android:text="@string/login_btn_signup"
-                android:textColor="@color/white_bone" />
+                android:textColor="@color/white" />
 
             <TextView
+                android:id="@+id/vTermsConditionsText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/spacing_large"
@@ -84,7 +85,9 @@
                 android:layout_weight="1"
                 android:gravity="bottom|center_horizontal"
                 android:text="@string/agree_terms"
-                android:textSize="@dimen/font_medium_extra" />
+                android:textSize="@dimen/font_medium_extra"
+                android:textColor="@color/gray"
+                android:textColorLink="@color/gray"/>
 
         </LinearLayout>
 

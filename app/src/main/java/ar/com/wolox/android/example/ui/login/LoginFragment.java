@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import ar.com.wolox.android.R;
 import ar.com.wolox.android.example.ui.viewpager.ViewPagerActivity;
@@ -35,6 +37,8 @@ public class LoginFragment extends WolmoFragment implements ILoginView {
     TextInputEditText vEmailInput;
     @BindView(R.id.vPasswordInput)
     TextInputEditText vPasswordInput;
+    @BindView(R.id.vTermsConditionsText)
+    TextView vTermsConditionsText;
 
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
@@ -43,6 +47,9 @@ public class LoginFragment extends WolmoFragment implements ILoginView {
         return R.layout.fragment_login;
     } // layout()
 
+    /**
+     *
+     */
     public void init() {
         ButterKnife.bind(this, getActivity());
         Context context = getActivity();
@@ -51,6 +58,8 @@ public class LoginFragment extends WolmoFragment implements ILoginView {
                 getString(R.string.preferences_name), Context.MODE_PRIVATE);
 
         editor = sharedPref.edit();
+
+        vTermsConditionsText.setMovementMethod(LinkMovementMethod.getInstance());
 
         vEmailInput.setText(sharedPref.getString(getString(R.string.login_email), ""));
         vPasswordInput.setText(sharedPref.getString(getString(R.string.login_pass), ""));
@@ -113,10 +122,26 @@ public class LoginFragment extends WolmoFragment implements ILoginView {
                     editor.commit();
 
                     presenter.onUsernameSaved();
+
+                    Intent intent = new Intent(getActivity(), HomeActivity.class);
+                    startActivity(intent);
+
                 }
 
             } //public void onClick(View v)
         }); //vLoginButton.setOnClickListener(new View.OnClickListener()
+
+        vSignUpButton.setOnClickListener(new View.OnClickListener() {
+
+            @OnClick
+            public void onClick(View v) {
+
+                    Intent intent = new Intent(getActivity(), RegisterActivity.class);
+                    startActivity(intent);
+
+            } //public void onClick(View v)
+        }); //vSignUpButton.setOnClickListener(new View.OnClickListener()
+
     } // public void setListeners()
 
     @Override

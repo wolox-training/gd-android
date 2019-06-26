@@ -23,7 +23,7 @@
     <string name="login_pass">Password</string>
     <string name="login_btn_login">Login</string>
     <string name="login_btn_signup">Sign Up</string>
-    <string name="agree_terms">By joining you agree to our <u> Terms &amp; Conditions </u>  </string>
+    <string name="agree_terms">By joining you agree to our <a href="http://www.wolox.com.ar">Terms &amp; Conditions </a></string>
     <string name="login_email_error">Field Email is required</string>
     <string name="login_email_invalid">Field Email has not a valid format</string>
     <string name="login_pass_error">Field Password is required</string>
