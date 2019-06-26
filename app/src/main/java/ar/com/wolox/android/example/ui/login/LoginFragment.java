@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -25,6 +24,7 @@ import butterknife.OnTextChanged;
 import com.google.android.material.textfield.TextInputEditText;
 
 import javax.inject.Inject;
+
 
 /**
  * A simple {@link WolmoFragment} subclass.
