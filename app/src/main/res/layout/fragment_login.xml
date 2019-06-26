@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,18 +12,16 @@
         android:gravity="center"
         android:orientation="vertical">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/spacing_none"
-                android:layout_weight="2"
+                android:layout_weight="@dimen/login_weight_two"
                 android:gravity="top|center_horizontal"
                 android:scaleType="centerCrop"
                 android:src="@drawable/wolox_banner" />
@@ -37,7 +35,6 @@
                 android:layout_marginRight="@dimen/spacing_large"
                 android:hint="@string/login_first_name"
                 android:textAlignment="viewStart" />
-
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/vLastNameInput"
@@ -58,7 +55,6 @@
                 android:layout_marginTop="@dimen/spacing_large"
                 android:background="@color/white"
                 android:elevation="5dp"
-                android:shadowRadius="2"
                 android:text="@string/login_btn_login"
                 android:textColor="@color/black" />
 
@@ -77,15 +73,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/spacing_large"
                 android:layout_marginRight="@dimen/spacing_large"
-                android:layout_weight="1"
+                android:layout_weight="@dimen/login_weight_one"
                 android:gravity="bottom|center_horizontal"
                 android:text="@string/agree_terms"
                 android:textSize="@dimen/font_medium_extra" />
 
         </LinearLayout>
 
-
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
