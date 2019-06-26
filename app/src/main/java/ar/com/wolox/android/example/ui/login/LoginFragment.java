@@ -1,8 +1,11 @@
 package ar.com.wolox.android.example.ui.login;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 
@@ -16,42 +19,55 @@ import butterknife.OnTextChanged;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-/**
-* A simple {@link WolmoFragment} subclass.
-*/
-public class LoginFragment extends WolmoFragment implements ILoginView {
-    LoginPresenter presenter;
+import java.util.regex.Pattern;
 
-    @BindView(R.id.vLoginButton) Button vLoginButton;
-    @BindView(R.id.vSignUpButton) Button vSignUpButton;
-    @BindView(R.id.vFirstNameInput) TextInputEditText vFirstNameInput;
-    @BindView(R.id.vLastNameInput) TextInputEditText vLastNameInput;
+/**
+ * A simple {@link WolmoFragment} subclass.
+ */
+public class LoginFragment extends WolmoFragment implements ILoginView {
+    LoginPresenter presenter = new LoginPresenter();
+
+    @BindView(R.id.vLoginButton)
+    Button vLoginButton;
+    @BindView(R.id.vSignUpButton)
+    Button vSignUpButton;
+    @BindView(R.id.vEmailInput)
+    TextInputEditText vEmailInput;
+    @BindView(R.id.vPasswordInput)
+    TextInputEditText vPasswordInput;
+
+    SharedPreferences sharedPref;
+    SharedPreferences.Editor editor;
 
     public int layout() {
         return R.layout.fragment_login;
-    }
+    } // layout()
 
     public void init() {
         ButterKnife.bind(this, getActivity());
-        vLoginButton.setEnabled(false);
-    }
+        Context context = getActivity();
+
+        sharedPref = context.getSharedPreferences(
+                getString(R.string.preferences_name), Context.MODE_PRIVATE);
+
+        editor = sharedPref.edit();
+
+        vEmailInput.setText(sharedPref.getString(getString(R.string.login_email), ""));
+        vPasswordInput.setText(sharedPref.getString(getString(R.string.login_pass), ""));
+    } // public void init()
 
     /**
      *
      */
     public void setListeners() {
-        vFirstNameInput.addTextChangedListener(new TextWatcher() {
+        vEmailInput.addTextChangedListener(new TextWatcher() {
             @OnTextChanged
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @OnTextChanged
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!vFirstNameInput.getText().toString().equals("")) {
-                    vLoginButton.setEnabled(true);
-                } else {
-                    vLoginButton.setEnabled(false);
-                }
+                vEmailInput.setError(null);
             }
 
             @OnTextChanged
@@ -59,17 +75,80 @@ public class LoginFragment extends WolmoFragment implements ILoginView {
             }
         });
 
-        vLoginButton.setOnClickListener(new View.OnClickListener() {
-            @OnClick
-            public void onClick(View v) {
-                presenter.storeUsername(vFirstNameInput.getText().toString());
+        vEmailInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    if (!validateEmail(vEmailInput.getText().toString())) {
+                        vEmailInput.setError(getText(R.string.login_email_invalid));
+                    }
+                }
             }
         });
-    }
+
+        vPasswordInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                vEmailInput.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        vLoginButton.setOnClickListener(new View.OnClickListener() {
+
+            @OnClick
+            public void onClick(View v) {
+                if (validateFields()) {
+                    editor.putString(getString(R.string.login_email), vEmailInput.getText().toString());
+                    editor.putString(getString(R.string.login_pass), vPasswordInput.getText().toString());
+                    editor.commit();
+
+                    presenter.onUsernameSaved();
+                }
+
+            } //public void onClick(View v)
+        }); //vLoginButton.setOnClickListener(new View.OnClickListener()
+    } // public void setListeners()
 
     @Override
     public void onUsernameSaved() {
         Intent intent = new Intent(getActivity(), ViewPagerActivity.class);
         startActivity(intent);
     }
+
+    private Boolean validateFields() {
+        Boolean ret = true;
+
+        if (vEmailInput.getText().toString().equals("")) {
+            vEmailInput.setError(getText(R.string.login_email_error));
+            ret = false;
+        } else {
+            if (!validateEmail(vEmailInput.getText().toString())) {
+                vEmailInput.setError(getText(R.string.login_email_invalid));
+                ret = false;
+            }
+        }
+
+        if (vPasswordInput.getText().toString().equals("")) {
+            vPasswordInput.setError(getText(R.string.login_pass_error));
+            ret = false;
+        }
+
+        return ret;
+    } // validateFields()
+
+    private Boolean validateEmail(String email) {
+        Pattern pattern = Patterns.EMAIL_ADDRESS;
+        return pattern.matcher(email).matches();
+    } // validateEmail(String email)
+
 }
