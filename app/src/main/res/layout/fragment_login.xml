@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
@@ -19,8 +20,8 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="@dimen/login_basic_weight"
+                android:layout_height="@dimen/spacing_none"
+                android:layout_weight="@dimen/login_weight_two"
                 android:gravity="top|center_horizontal"
                 android:scaleType="centerCrop"
                 android:src="@drawable/wolox_banner" />
@@ -43,7 +44,6 @@
                 android:layout_marginTop="@dimen/spacing_large"
                 android:layout_marginRight="@dimen/spacing_large"
                 android:hint="@string/login_pass"
-                android:inputType="textPassword"
                 android:textAlignment="viewStart" />
 
             <Button
@@ -74,10 +74,10 @@
             <TextView
                 android:id="@+id/vTermsConditionsText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/spacing_none"
                 android:layout_marginLeft="@dimen/spacing_large"
                 android:layout_marginRight="@dimen/spacing_large"
-                android:layout_weight="@dimen/login_basic_weight"
+                android:layout_weight="@dimen/login_weight_one"
                 android:gravity="bottom|center_horizontal"
                 android:text="@string/agree_terms"
                 android:textColor="@color/gray"
