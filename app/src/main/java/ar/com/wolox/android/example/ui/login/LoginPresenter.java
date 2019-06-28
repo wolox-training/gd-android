@@ -10,7 +10,6 @@ import ar.com.wolox.android.example.network.UserService;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Patterns;
-
 import androidx.annotation.NonNull;
 import java.util.regex.Pattern;
 

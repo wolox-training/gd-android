@@ -25,12 +25,10 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import javax.inject.Inject;
 
-
 /**
  * A simple {@link WolmoFragment} subclass.
  */
 public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILoginView {
-
     @BindView(R.id.vLoginButton) Button vLoginButton;
     @BindView(R.id.vSignUpButton) Button vSignUpButton;
     @BindView(R.id.vEmailInput) TextInputEditText vEmailInput;
