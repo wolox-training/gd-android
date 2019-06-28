@@ -24,6 +24,8 @@
     <string name="login_email_error">Field Email is required</string>
     <string name="login_email_invalid">Field Email has not a valid format</string>
     <string name="login_pass_error">Field Password is required</string>
+    <string name="login_error_credentials">Login failed. Check your credentials</string>
+    <string name="login_error_service">Error while logging. Try again later</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -10,6 +10,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ar.com.wolox.android.R;
 import ar.com.wolox.android.example.ui.viewpager.ViewPagerActivity;
@@ -23,11 +24,12 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.regex.Pattern;
 
+import javax.inject.Inject;
+
 /**
  * A simple {@link WolmoFragment} subclass.
  */
-public class LoginFragment extends WolmoFragment implements ILoginView {
-    LoginPresenter presenter = new LoginPresenter();
+public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILoginView {
 
     @BindView(R.id.vLoginButton)
     Button vLoginButton;
@@ -42,6 +44,9 @@ public class LoginFragment extends WolmoFragment implements ILoginView {
 
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
+
+    @Inject
+    public LoginFragment() { }
 
     public int layout() {
         return R.layout.fragment_login;
@@ -116,15 +121,14 @@ public class LoginFragment extends WolmoFragment implements ILoginView {
 
             @OnClick
             public void onClick(View v) {
+                int ret;
                 if (validateFields()) {
                     editor.putString(getString(R.string.login_email), vEmailInput.getText().toString());
                     editor.putString(getString(R.string.login_pass), vPasswordInput.getText().toString());
                     editor.commit();
 
-                    presenter.onUsernameSaved();
-
-                    Intent intent = new Intent(getActivity(), HomeActivity.class);
-                    startActivity(intent);
+                    getPresenter().onLoginButtonClicked(vEmailInput.getText().toString(),
+                            vPasswordInput.getText().toString());
 
                 }
 
@@ -136,8 +140,8 @@ public class LoginFragment extends WolmoFragment implements ILoginView {
             @OnClick
             public void onClick(View v) {
 
-                    Intent intent = new Intent(getActivity(), RegisterActivity.class);
-                    startActivity(intent);
+                Intent intent = new Intent(getActivity(), RegisterActivity.class);
+                startActivity(intent);
 
             } //public void onClick(View v)
         }); //vSignUpButton.setOnClickListener(new View.OnClickListener()
@@ -148,6 +152,18 @@ public class LoginFragment extends WolmoFragment implements ILoginView {
     public void onUsernameSaved() {
         Intent intent = new Intent(getActivity(), ViewPagerActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void showLoginSuccess() {
+        Intent intent = new Intent(getActivity(), HomeActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void showLoginFailure(int error) {
+        Toast.makeText(getActivity(), getText(error), Toast.LENGTH_SHORT).show();
+
     }
 
     private Boolean validateFields() {
