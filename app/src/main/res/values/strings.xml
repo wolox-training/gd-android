@@ -25,6 +25,12 @@
     <string name="login_email_invalid">Field Email has not a valid format</string>
     <string name="login_pass_error">Field Password is required</string>
 
+    <!-- Home -->
+    <string name="home_text">HOME PAGE</string>
+
+    <!-- Register -->
+    <string name="register_text">REGISTER ACTIVITY</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
