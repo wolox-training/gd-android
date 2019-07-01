@@ -7,7 +7,6 @@ import ar.com.wolox.android.example.ui.login.LoginFragment
 import ar.com.wolox.android.example.ui.login.RegisterActivity
 import ar.com.wolox.android.example.ui.login.RootActivity
 
-
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
