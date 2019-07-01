@@ -46,7 +46,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
      * @param email EMail
      * @param password Pass
      */
-    public void onLoginButtonClicked(String email, String password) {
+    public void onLoginButtonClicked(@Nullable String email, @Nullable String password) {
 
         if (validateFields(email, password)) {
 

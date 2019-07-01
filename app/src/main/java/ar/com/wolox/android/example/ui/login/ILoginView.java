@@ -10,13 +10,13 @@ public interface ILoginView {
 
     void onUsernameSaved();
 
+    void showLoginSuccess();
+
     void setEmailError(@NonNull int error);
 
     void setPasswordError(@NonNull int error);
 
     void onLoginButtonPressed();
-
-    void showLoginSuccess();
 
     void showLoginFailure(@NonNull int error);
 
