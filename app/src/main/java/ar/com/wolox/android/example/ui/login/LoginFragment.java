@@ -31,16 +31,11 @@ import javax.inject.Inject;
  */
 public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILoginView {
 
-    @BindView(R.id.vLoginButton)
-    Button vLoginButton;
-    @BindView(R.id.vSignUpButton)
-    Button vSignUpButton;
-    @BindView(R.id.vEmailInput)
-    TextInputEditText vEmailInput;
-    @BindView(R.id.vPasswordInput)
-    TextInputEditText vPasswordInput;
-    @BindView(R.id.vTermsConditionsText)
-    TextView vTermsConditionsText;
+    @BindView(R.id.vLoginButton) Button vLoginButton;
+    @BindView(R.id.vSignUpButton) Button vSignUpButton;
+    @BindView(R.id.vEmailInput) TextInputEditText vEmailInput;
+    @BindView(R.id.vPasswordInput) TextInputEditText vPasswordInput;
+    @BindView(R.id.vTermsConditionsText) TextView vTermsConditionsText;
 
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
@@ -50,7 +45,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     public int layout() {
         return R.layout.fragment_login;
-    } // layout()
+    }
 
     /**
      *
@@ -68,7 +63,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
         vEmailInput.setText(sharedPref.getString(getString(R.string.login_email), ""));
         vPasswordInput.setText(sharedPref.getString(getString(R.string.login_pass), ""));
-    } // public void init()
+    }
 
     /**
      *
@@ -132,8 +127,8 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
                 }
 
-            } //public void onClick(View v)
-        }); //vLoginButton.setOnClickListener(new View.OnClickListener()
+            }
+        });
 
         vSignUpButton.setOnClickListener(new View.OnClickListener() {
 
@@ -143,10 +138,10 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
                 Intent intent = new Intent(getActivity(), RegisterActivity.class);
                 startActivity(intent);
 
-            } //public void onClick(View v)
-        }); //vSignUpButton.setOnClickListener(new View.OnClickListener()
+            }
+        });
 
-    } // public void setListeners()
+    }
 
     @Override
     public void onUsernameSaved() {
@@ -185,11 +180,11 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         }
 
         return ret;
-    } // validateFields()
+    }
 
     private Boolean validateEmail(String email) {
         Pattern pattern = Patterns.EMAIL_ADDRESS;
         return pattern.matcher(email).matches();
-    } // validateEmail(String email)
+    }
 
 }
