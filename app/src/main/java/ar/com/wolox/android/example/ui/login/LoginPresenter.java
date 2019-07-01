@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Patterns;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.util.regex.Pattern;
 
 import ar.com.wolox.android.R;
@@ -33,7 +36,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
 
     }
 
-    public void onEmailLostFocus(Boolean hasFocus, String email) {
+    public void onEmailLostFocus(@NonNull Boolean hasFocus, @Nullable String email) {
         if (!hasFocus) {
             if (!validateEmail(email)) {
                 getView().setEmailError(R.string.login_email_invalid);
@@ -41,7 +44,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
         }
     }
 
-    public void onLoginButtonClicked(String email, String pass) {
+    public void onLoginButtonClicked(@NonNull String email, @NonNull String pass) {
         if (validateFields(email, pass)) {
             editor.putString(mPrefEmail, email);
             editor.putString(mPrefPass, pass);
@@ -54,10 +57,10 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
 
     }
 
-    private Boolean validateFields(String email, String pass) {
+    private Boolean validateFields(@Nullable String email, @Nullable String pass) {
         Boolean fieldsValidate = true;
 
-        if ("".equals(email)) {
+        if (email.isEmpty()) {
             getView().setEmailError(R.string.login_email_error);
             fieldsValidate = false;
         } else {
@@ -67,7 +70,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
             }
         }
 
-        if ("".equals(pass)) {
+        if (pass.isEmpty()) {
             getView().setPasswordError(R.string.login_pass_error);
             fieldsValidate = false;
         }
@@ -75,13 +78,13 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
         return fieldsValidate;
     }
 
-    private Boolean validateEmail(String email) {
+    private Boolean validateEmail(@NonNull String email) {
         Pattern pattern = Patterns.EMAIL_ADDRESS;
         return pattern.matcher(email).matches();
     }
 
-    public void setPreferencesConf(Context context, String prefName,
-                                   String prefEmail, String prefPass) {
+    public void setPreferencesConf(@NonNull Context context, @NonNull String prefName,
+                                   @NonNull String prefEmail, @NonNull String prefPass) {
 
         mPrefEmail = prefEmail;
         mPrefPass = prefPass;

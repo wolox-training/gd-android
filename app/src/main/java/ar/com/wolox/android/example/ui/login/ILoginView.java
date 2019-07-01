@@ -1,14 +1,16 @@
 package ar.com.wolox.android.example.ui.login;
 
+import androidx.annotation.NonNull;
+
 /**
  * ILoginView
  */
 public interface ILoginView {
     void onUsernameSaved();
 
-    void setEmailError(int error);
+    void setEmailError(@NonNull int error);
 
-    void setPasswordError(int error);
+    void setPasswordError(@NonNull int error);
 
     void onLoginButtonPressed();
 
