@@ -25,16 +25,11 @@ import com.google.android.material.textfield.TextInputEditText;
  */
 public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILoginView {
 
-    @BindView(R.id.vLoginButton)
-    Button vLoginButton;
-    @BindView(R.id.vSignUpButton)
-    Button vSignUpButton;
-    @BindView(R.id.vEmailInput)
-    TextInputEditText vEmailInput;
-    @BindView(R.id.vPasswordInput)
-    TextInputEditText vPasswordInput;
-    @BindView(R.id.vTermsConditionsText)
-    TextView vTermsConditionsText;
+    @BindView(R.id.vLoginButton) Button vLoginButton;
+    @BindView(R.id.vSignUpButton) Button vSignUpButton;
+    @BindView(R.id.vEmailInput) TextInputEditText vEmailInput;
+    @BindView(R.id.vPasswordInput) TextInputEditText vPasswordInput;
+    @BindView(R.id.vTermsConditionsText) TextView vTermsConditionsText;
 
     SharedPreferences sharedPref;
 
