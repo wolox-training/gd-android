@@ -135,10 +135,12 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
 
     }
 
-    public void getInitialCredentials(@Nullable String prefEmail, @Nullable String prefPass) {
+    public void getInitialCredentials(@Nullable String prefEmail,
+                                      @Nullable String prefPass,
+                                      @Nullable String defaultValue) {
 
-        getView().setInitialCredentials(sharedPref.getString(prefEmail, ""),
-        sharedPref.getString(prefPass, ""));
+        getView().setInitialCredentials(sharedPref.getString(prefEmail, defaultValue),
+        sharedPref.getString(prefPass, defaultValue));
     }
 
 }

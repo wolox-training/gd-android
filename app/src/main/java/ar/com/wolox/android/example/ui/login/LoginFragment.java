@@ -62,7 +62,8 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
                 getString(R.string.login_pass));
 
         getPresenter().getInitialCredentials(getString(R.string.login_email),
-                getString(R.string.login_pass));
+                getString(R.string.login_pass),
+                getString(R.string.prefs_default_value));
 
     }
 

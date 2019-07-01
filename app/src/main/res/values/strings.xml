@@ -14,6 +14,7 @@
     <string name="fragment_example_login">Login</string>
 
     <string name="preferences_name">ar.com.wolox.android.example.ui.login</string>
+    <string name="prefs_default_value" />
 
     <!-- Login -->
     <string name="login_email">Email</string>
