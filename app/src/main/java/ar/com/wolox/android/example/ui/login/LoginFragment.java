@@ -42,7 +42,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     public int layout() {
         return R.layout.fragment_login;
-    } // layout()
+    }
 
     /**
      *
