@@ -8,6 +8,14 @@ import ar.com.wolox.android.R;
 import ar.com.wolox.android.example.model.User;
 import ar.com.wolox.android.example.network.RetrofitInstance;
 import ar.com.wolox.android.example.network.UserService;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Patterns;
+
+import androidx.annotation.NonNull;
+import java.util.regex.Pattern;
+
+import ar.com.wolox.android.example.utils.UserSession;
 import ar.com.wolox.wolmo.core.presenter.BasePresenter;
 import ar.com.wolox.wolmo.networking.retrofit.callback.NetworkCallback;
 import okhttp3.ResponseBody;
@@ -19,6 +27,14 @@ import javax.inject.Inject;
  * A simple {@link BasePresenter} subclass.
  */
 public class LoginPresenter extends BasePresenter<ILoginView> {
+
+    private UserSession mUserSession;
+    private String mPrefName;
+    private String mPrefEmail;
+    private String mPrefPass;
+
+    SharedPreferences sharedPref;
+    SharedPreferences.Editor editor;
 
     @Inject
     public LoginPresenter() {
@@ -32,32 +48,97 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
      */
     public void onLoginButtonClicked(String email, String password) {
 
-        UserService usuarioService = RetrofitInstance.getRetrofitInstance().create(UserService.class);
-        Call<List<User>> call = usuarioService.getUserLogin(email);
+        if (validateFields(email, password)) {
 
-        call.enqueue(new NetworkCallback<List<User>>() {
+            UserService usuarioService = RetrofitInstance.getRetrofitInstance().create(UserService.class);
+            Call<List<User>> call = usuarioService.getUserLogin(email);
 
-            @Override
-            public void onResponseSuccessful(@Nullable List<User> response) {
+            call.enqueue(new NetworkCallback<List<User>>() {
 
-                if ((response.isEmpty()) || (!response.get(0).getPassword().equals(password))) {
-                    getView().showLoginFailure(R.string.login_error_credentials);
-                } else {
-                    getView().showLoginSuccess();
+                @Override
+                public void onResponseSuccessful(@Nullable List<User> response) {
+
+                    if ((response.isEmpty()) || (!response.get(0).getPassword().equals(password))) {
+                        getView().showLoginFailure(R.string.login_error_credentials);
+                    } else {
+                        editor.putString(mPrefEmail, email);
+                        editor.putString(mPrefPass, password);
+                        editor.commit();
+
+                        getView().onLoginButtonPressed();
+                    }
                 }
-            }
 
-            @Override
-            public void onResponseFailed(@Nullable ResponseBody responseBody, int code) {
-                getView().showLoginFailure(R.string.login_error_credentials);
-            }
+                @Override
+                public void onResponseFailed(@Nullable ResponseBody responseBody, int code) {
+                    getView().showLoginFailure(R.string.login_error_credentials);
+                }
 
-            @Override
-            public void onCallFailure(Throwable t) {
-                getView().showLoginFailure(R.string.login_error_service);
-            }
-        });
+                @Override
+                public void onCallFailure(Throwable t) {
+                    getView().showLoginFailure(R.string.login_error_service);
+                }
+            });
 
-    } // public void onLoginButtonClicked(String email, String password)
+        }
+
+    }
+
+    public void onUsernameSaved() {
+
+    }
+
+    public void onEmailLostFocus(@NonNull Boolean hasFocus, @Nullable String email) {
+        if (!hasFocus) {
+            if (!validateEmail(email)) {
+                getView().setEmailError(R.string.login_email_invalid);
+            }
+        }
+    }
+
+    private Boolean validateFields(@Nullable String email, @Nullable String pass) {
+        Boolean fieldsValidate = true;
+
+        if (email.isEmpty()) {
+            getView().setEmailError(R.string.login_email_error);
+            fieldsValidate = false;
+        } else {
+            if (!validateEmail(email)) {
+                getView().setEmailError(R.string.login_email_invalid);
+                fieldsValidate = false;
+            }
+        }
+
+        if (pass.isEmpty()) {
+            getView().setPasswordError(R.string.login_pass_error);
+            fieldsValidate = false;
+        }
+
+        return fieldsValidate;
+    }
+
+    private Boolean validateEmail(@NonNull String email) {
+        Pattern pattern = Patterns.EMAIL_ADDRESS;
+        return pattern.matcher(email).matches();
+    }
+
+    public void setPreferencesConf(@NonNull Context context, @NonNull String prefName,
+                                   @NonNull String prefEmail, @NonNull String prefPass) {
+
+        mPrefEmail = prefEmail;
+        mPrefPass = prefPass;
+        mPrefName = prefName;
+
+        sharedPref = context.getSharedPreferences(mPrefName, Context.MODE_PRIVATE);
+
+        editor = sharedPref.edit();
+
+    }
+
+    public void getInitialCredentials(@Nullable String prefEmail, @Nullable String prefPass) {
+
+        getView().setInitialCredentials(sharedPref.getString(prefEmail, ""),
+        sharedPref.getString(prefPass, ""));
+    }
 
 }

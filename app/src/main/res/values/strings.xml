@@ -27,6 +27,12 @@
     <string name="login_error_credentials">Login failed. Check your credentials</string>
     <string name="login_error_service">Error while logging. Try again later</string>
 
+    <!-- Home -->
+    <string name="home_text">HOME PAGE</string>
+
+    <!-- Register -->
+    <string name="register_text">REGISTER ACTIVITY</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

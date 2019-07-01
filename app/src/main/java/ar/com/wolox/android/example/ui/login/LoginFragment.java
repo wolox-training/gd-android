@@ -6,11 +6,12 @@ import android.content.SharedPreferences;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import ar.com.wolox.android.R;
 import ar.com.wolox.android.example.ui.viewpager.ViewPagerActivity;
@@ -21,8 +22,6 @@ import butterknife.OnClick;
 import butterknife.OnTextChanged;
 
 import com.google.android.material.textfield.TextInputEditText;
-
-import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
@@ -38,7 +37,6 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     @BindView(R.id.vTermsConditionsText) TextView vTermsConditionsText;
 
     SharedPreferences sharedPref;
-    SharedPreferences.Editor editor;
 
     @Inject
     public LoginFragment() { }
@@ -52,17 +50,20 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
      */
     public void init() {
         ButterKnife.bind(this, getActivity());
-        Context context = getActivity();
 
-        sharedPref = context.getSharedPreferences(
+        sharedPref = getActivity().getSharedPreferences(
                 getString(R.string.preferences_name), Context.MODE_PRIVATE);
-
-        editor = sharedPref.edit();
 
         vTermsConditionsText.setMovementMethod(LinkMovementMethod.getInstance());
 
-        vEmailInput.setText(sharedPref.getString(getString(R.string.login_email), ""));
-        vPasswordInput.setText(sharedPref.getString(getString(R.string.login_pass), ""));
+        getPresenter().setPreferencesConf(getContext(),
+                getString(R.string.preferences_name),
+                getString(R.string.login_email),
+                getString(R.string.login_pass));
+
+        getPresenter().getInitialCredentials(getString(R.string.login_email),
+                getString(R.string.login_pass));
+
     }
 
     /**
@@ -87,11 +88,9 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         vEmailInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    if (!validateEmail(vEmailInput.getText().toString())) {
-                        vEmailInput.setError(getText(R.string.login_email_invalid));
-                    }
-                }
+
+                getPresenter().onEmailLostFocus(hasFocus, vEmailInput.getText().toString());
+
             }
         });
 
@@ -116,16 +115,9 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
             @OnClick
             public void onClick(View v) {
-                int ret;
-                if (validateFields()) {
-                    editor.putString(getString(R.string.login_email), vEmailInput.getText().toString());
-                    editor.putString(getString(R.string.login_pass), vPasswordInput.getText().toString());
-                    editor.commit();
 
-                    getPresenter().onLoginButtonClicked(vEmailInput.getText().toString(),
-                            vPasswordInput.getText().toString());
-
-                }
+                getPresenter().onLoginButtonClicked(vEmailInput.getText().toString(),
+                        vPasswordInput.getText().toString());
 
             }
         });
@@ -151,8 +143,6 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     @Override
     public void showLoginSuccess() {
-        Intent intent = new Intent(getActivity(), HomeActivity.class);
-        startActivity(intent);
     }
 
     @Override
@@ -161,30 +151,25 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     }
 
-    private Boolean validateFields() {
-        Boolean ret = true;
-
-        if (vEmailInput.getText().toString().equals("")) {
-            vEmailInput.setError(getText(R.string.login_email_error));
-            ret = false;
-        } else {
-            if (!validateEmail(vEmailInput.getText().toString())) {
-                vEmailInput.setError(getText(R.string.login_email_invalid));
-                ret = false;
-            }
-        }
-
-        if (vPasswordInput.getText().toString().equals("")) {
-            vPasswordInput.setError(getText(R.string.login_pass_error));
-            ret = false;
-        }
-
-        return ret;
+    @Override
+    public void setInitialCredentials(@Nullable String email, @Nullable String password) {
+        vEmailInput.setText(email);
+        vPasswordInput.setText(password);
     }
 
-    private Boolean validateEmail(String email) {
-        Pattern pattern = Patterns.EMAIL_ADDRESS;
-        return pattern.matcher(email).matches();
+    public void setEmailError(int error) {
+        vEmailInput.setError(getText(error));
+    }
+
+    @Override
+    public void setPasswordError(int error) {
+        vPasswordInput.setError(getText(error));
+    }
+
+    @Override
+    public void onLoginButtonPressed() {
+        Intent intent = new Intent(getActivity(), HomeActivity.class);
+        startActivity(intent);
     }
 
 }
