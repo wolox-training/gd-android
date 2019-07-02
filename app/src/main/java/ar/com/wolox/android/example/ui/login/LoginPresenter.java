@@ -65,7 +65,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                         editor.putString(mPrefPass, password);
                         editor.commit();
 
-                        getView().onLoginButtonPressed();
+                        getView().onLoginSuccesfully();
                     }
                 }
 

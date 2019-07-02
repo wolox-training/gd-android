@@ -16,7 +16,7 @@ public interface ILoginView {
 
     void setPasswordError(@NonNull int error);
 
-    void onLoginButtonPressed();
+    void onLoginSuccesfully();
 
     void showLoginFailure(@NonNull int error);
 

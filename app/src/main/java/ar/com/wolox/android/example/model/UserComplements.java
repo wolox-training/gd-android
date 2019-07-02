@@ -2,10 +2,12 @@ package ar.com.wolox.android.example.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * UserComplements
  */
-public class UserComplements {
+public class UserComplements implements Serializable {
 
     @SerializedName("picture")
     private String picture;
@@ -20,11 +22,11 @@ public class UserComplements {
     @SerializedName("phone")
     private String phone;
 
-    // Constructor vacio para instanciar
+    // Empty constructor for instance
     public UserComplements() {
     }
 
-    // Constructor sobrecargado
+    // Overloaded constructor
     public UserComplements(String picture, String cover, String description, String location, String name, String phone) {
         this.picture = picture;
         this.cover = cover;

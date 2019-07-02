@@ -17,6 +17,13 @@ public final class RetrofitInstance {
      *
      * @return RET
      */
+    private RetrofitInstance() {
+        //not called
+    }
+
+    /**
+     * @return retrofit
+     */
     public static Retrofit getRetrofitInstance() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -29,10 +36,6 @@ public final class RetrofitInstance {
                     .build();
         }
         return retrofit;
-    }
-
-    private RetrofitInstance() {
-        //not called
     }
 
 }

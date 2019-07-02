@@ -168,7 +168,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     }
 
     @Override
-    public void onLoginButtonPressed() {
+    public void onLoginSuccesfully() {
         Intent intent = new Intent(getActivity(), HomeActivity.class);
         startActivity(intent);
     }
