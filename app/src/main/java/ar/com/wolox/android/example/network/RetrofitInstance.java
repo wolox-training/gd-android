@@ -17,7 +17,12 @@ public final class RetrofitInstance {
      *
      * @return RET
      */
+<<<<<<< 7695e23f3f1eeffcf25948879232819097d5a278
 
+=======
+<<<<<<< f659878fe59f73bd543640d4850a1338a51cb752
+=======
+>>>>>>> Login acceso (#3)
     private RetrofitInstance() {
         //not called
     }
@@ -25,6 +30,10 @@ public final class RetrofitInstance {
     /**
      * @return retrofit
      */
+<<<<<<< 7695e23f3f1eeffcf25948879232819097d5a278
+=======
+>>>>>>> Login acceso (#3)
+>>>>>>> Login acceso (#3)
     public static Retrofit getRetrofitInstance() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -39,4 +48,14 @@ public final class RetrofitInstance {
         return retrofit;
     }
 
+<<<<<<< 7695e23f3f1eeffcf25948879232819097d5a278
+=======
+<<<<<<< f659878fe59f73bd543640d4850a1338a51cb752
+    private RetrofitInstance() {
+        //not called
+    }
+
+=======
+>>>>>>> Login acceso (#3)
+>>>>>>> Login acceso (#3)
 }

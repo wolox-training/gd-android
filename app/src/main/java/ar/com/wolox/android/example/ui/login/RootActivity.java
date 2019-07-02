@@ -34,12 +34,8 @@ public class RootActivity extends WolmoActivity {
 
     SharedPreferences sharedPref;
     String email, password, defaultValue;
-<<<<<<< 60ac7cf8e47ea029fb121af87da598b980e61849
     Intent intentHome, intentBase;
-=======
-    Intent intent;
     ProgressDialog dialog;
->>>>>>> U2-login-errores resuelto
 
     @Override
     protected int layout() {
@@ -62,14 +58,14 @@ public class RootActivity extends WolmoActivity {
         intentHome.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         if (email.isEmpty() || password.isEmpty()) {
-            startActivity(intentBase);
+            replaceFragment(R.id.vActivityBaseContent, new LoginFragment());
         } else {
             if (isNetworkAvaliable(getApplicationContext())) {
                 connectUser();
             } else {
                 Toast.makeText(this, getText(R.string.error_internet_connection), Toast.LENGTH_SHORT).show();
             }
-                
+
         }
 
     }
@@ -87,38 +83,24 @@ public class RootActivity extends WolmoActivity {
             public void onResponseSuccessful(@Nullable List<User> response) {
 
                 if ((response.isEmpty()) || (!response.get(0).getPassword().equals(password))) {
-<<<<<<< 60ac7cf8e47ea029fb121af87da598b980e61849
+                    dialog.dismiss();
                     startActivity(intentBase);
                 } else {
+                    dialog.dismiss();
                     startActivity(intentHome);
-=======
-                    dialog.dismiss();
-                    replaceFragment(R.id.vActivityBaseContent, new LoginFragment());
-                } else {
-                    dialog.dismiss();
-                    startActivity(intent);
->>>>>>> U2-login-errores resuelto
                 }
             }
 
             @Override
             public void onResponseFailed(@Nullable ResponseBody responseBody, int code) {
-<<<<<<< 60ac7cf8e47ea029fb121af87da598b980e61849
-                startActivity(intentBase);
-=======
                 dialog.dismiss();
-                replaceFragment(R.id.vActivityBaseContent, new LoginFragment());
->>>>>>> U2-login-errores resuelto
+                startActivity(intentBase);
             }
 
             @Override
             public void onCallFailure(Throwable t) {
-<<<<<<< 60ac7cf8e47ea029fb121af87da598b980e61849
-                startActivity(intentBase);
-=======
                 dialog.dismiss();
-                replaceFragment(R.id.vActivityBaseContent, new LoginFragment());
->>>>>>> U2-login-errores resuelto
+                startActivity(intentBase);
             }
         });
     }

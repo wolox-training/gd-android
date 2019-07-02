@@ -8,6 +8,10 @@ import java.io.Serializable;
  * User Class
  */
 public class User implements Serializable {
+<<<<<<< 7695e23f3f1eeffcf25948879232819097d5a278
+=======
+
+>>>>>>> Login acceso (#3)
     @SerializedName("id")
     private int id;
     @SerializedName("username")

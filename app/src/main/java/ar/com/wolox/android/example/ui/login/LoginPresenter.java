@@ -53,7 +53,6 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     public void onLoginButtonClicked(@Nullable String email, @Nullable String password) {
 
         if (validateFields(email, password)) {
-
             Call<List<User>> call = mRetrofiServices.getService(UserService.class).getUserLogin(email);
 
             call.enqueue(new NetworkCallback<List<User>>() {
