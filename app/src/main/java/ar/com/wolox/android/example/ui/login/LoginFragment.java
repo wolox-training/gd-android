@@ -9,6 +9,9 @@ import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import ar.com.wolox.android.R;
 import ar.com.wolox.android.example.ui.viewpager.ViewPagerActivity;
@@ -19,6 +22,8 @@ import butterknife.OnClick;
 import butterknife.OnTextChanged;
 
 import com.google.android.material.textfield.TextInputEditText;
+
+import javax.inject.Inject;
 
 /**
  * A simple {@link WolmoFragment} subclass.
@@ -33,6 +38,9 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     SharedPreferences sharedPref;
 
+    @Inject
+    public LoginFragment() { }
+
     public int layout() {
         return R.layout.fragment_login;
     }
@@ -43,13 +51,20 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     public void init() {
         ButterKnife.bind(this, getActivity());
 
-        sharedPref = getContext().getSharedPreferences(
+        sharedPref = getActivity().getSharedPreferences(
                 getString(R.string.preferences_name), Context.MODE_PRIVATE);
 
-        vEmailInput.setText(sharedPref.getString(getString(R.string.login_email), ""));
-        vPasswordInput.setText(sharedPref.getString(getString(R.string.login_pass), ""));
-
         vTermsConditionsText.setMovementMethod(LinkMovementMethod.getInstance());
+
+        getPresenter().setPreferencesConf(getContext(),
+                getString(R.string.preferences_name),
+                getString(R.string.login_email),
+                getString(R.string.login_pass));
+
+        getPresenter().getInitialCredentials(getString(R.string.login_email),
+                getString(R.string.login_pass),
+                getString(R.string.prefs_default_value));
+
     }
 
     /**
@@ -74,7 +89,9 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         vEmailInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
+
                 getPresenter().onEmailLostFocus(hasFocus, vEmailInput.getText().toString());
+
             }
         });
 
@@ -99,10 +116,6 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
             @OnClick
             public void onClick(View v) {
-                getPresenter().setPreferencesConf(getContext(),
-                        getString(R.string.preferences_name),
-                        getString(R.string.login_email),
-                        getString(R.string.login_pass));
 
                 getPresenter().onLoginButtonClicked(vEmailInput.getText().toString(),
                         vPasswordInput.getText().toString());
@@ -130,6 +143,21 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     }
 
     @Override
+    public void showLoginSuccess() {
+    }
+
+    @Override
+    public void showLoginFailure(int error) {
+        Toast.makeText(getActivity(), getText(error), Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void setInitialCredentials(@Nullable String email, @Nullable String password) {
+        vEmailInput.setText(email);
+        vPasswordInput.setText(password);
+    }
+
     public void setEmailError(int error) {
         vEmailInput.setError(getText(error));
     }
@@ -140,7 +168,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     }
 
     @Override
-    public void onLoginButtonPressed() {
+    public void onLoginSuccesfully() {
         Intent intent = new Intent(getActivity(), HomeActivity.class);
         startActivity(intent);
     }
