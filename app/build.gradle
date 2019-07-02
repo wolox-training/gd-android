@@ -126,7 +126,6 @@ dependencies {
     implementation "com.google.android.material:material:$androidx_material_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
     implementation "com.android.support.constraint:constraint-layout:$constraintlayout"
-    implementation 'com.google.code.gson:gson:2.8.5'
 
     // Dagger
     implementation "com.google.dagger:dagger:$dagger_version"
