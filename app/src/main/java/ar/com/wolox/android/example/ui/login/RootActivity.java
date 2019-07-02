@@ -1,8 +1,12 @@
 package ar.com.wolox.android.example.ui.login;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -30,7 +34,12 @@ public class RootActivity extends WolmoActivity {
 
     SharedPreferences sharedPref;
     String email, password, defaultValue;
+<<<<<<< 60ac7cf8e47ea029fb121af87da598b980e61849
     Intent intentHome, intentBase;
+=======
+    Intent intent;
+    ProgressDialog dialog;
+>>>>>>> U2-login-errores resuelto
 
     @Override
     protected int layout() {
@@ -55,7 +64,12 @@ public class RootActivity extends WolmoActivity {
         if (email.isEmpty() || password.isEmpty()) {
             startActivity(intentBase);
         } else {
-            connectUser();
+            if (isNetworkAvaliable(getApplicationContext())) {
+                connectUser();
+            } else {
+                Toast.makeText(this, getText(R.string.error_internet_connection), Toast.LENGTH_SHORT).show();
+            }
+                
         }
 
     }
@@ -65,6 +79,7 @@ public class RootActivity extends WolmoActivity {
      */
     public void connectUser() {
         Call<List<User>> call = mRetrofiServices.getService(UserService.class).getUserLogin(email);
+        dialog = ProgressDialog.show(this, getText(R.string.login_dialog_title), getText(R.string.login_dialog_message), true);
 
         call.enqueue(new NetworkCallback<List<User>>() {
 
@@ -72,22 +87,52 @@ public class RootActivity extends WolmoActivity {
             public void onResponseSuccessful(@Nullable List<User> response) {
 
                 if ((response.isEmpty()) || (!response.get(0).getPassword().equals(password))) {
+<<<<<<< 60ac7cf8e47ea029fb121af87da598b980e61849
                     startActivity(intentBase);
                 } else {
                     startActivity(intentHome);
+=======
+                    dialog.dismiss();
+                    replaceFragment(R.id.vActivityBaseContent, new LoginFragment());
+                } else {
+                    dialog.dismiss();
+                    startActivity(intent);
+>>>>>>> U2-login-errores resuelto
                 }
             }
 
             @Override
             public void onResponseFailed(@Nullable ResponseBody responseBody, int code) {
+<<<<<<< 60ac7cf8e47ea029fb121af87da598b980e61849
                 startActivity(intentBase);
+=======
+                dialog.dismiss();
+                replaceFragment(R.id.vActivityBaseContent, new LoginFragment());
+>>>>>>> U2-login-errores resuelto
             }
 
             @Override
             public void onCallFailure(Throwable t) {
+<<<<<<< 60ac7cf8e47ea029fb121af87da598b980e61849
                 startActivity(intentBase);
+=======
+                dialog.dismiss();
+                replaceFragment(R.id.vActivityBaseContent, new LoginFragment());
+>>>>>>> U2-login-errores resuelto
             }
         });
+    }
+
+    /**
+     *
+     * @param ctx context
+     * @return boolean
+     */
+    public boolean isNetworkAvaliable(Context ctx) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) ctx
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        return connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED;
     }
 
 }

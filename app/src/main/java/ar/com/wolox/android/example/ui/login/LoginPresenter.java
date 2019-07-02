@@ -9,6 +9,8 @@ import ar.com.wolox.android.example.model.User;
 import ar.com.wolox.android.example.network.UserService;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Patterns;
 import androidx.annotation.NonNull;
 import java.util.regex.Pattern;
@@ -141,7 +143,18 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                                       @Nullable String defaultValue) {
 
         getView().setInitialCredentials(sharedPref.getString(prefEmail, defaultValue),
-        sharedPref.getString(prefPass, defaultValue));
+                sharedPref.getString(prefPass, defaultValue));
+    }
+
+    public void isNetworkAvaliable(Context ctx) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) ctx
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            getView().showLoginSuccess();
+        } else {
+
+        }
     }
 
 }

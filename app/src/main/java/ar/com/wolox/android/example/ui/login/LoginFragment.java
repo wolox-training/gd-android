@@ -1,5 +1,6 @@
 package ar.com.wolox.android.example.ui.login;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -36,6 +37,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     @BindView(R.id.vTermsConditionsText) TextView vTermsConditionsText;
 
     SharedPreferences sharedPref;
+    ProgressDialog dialog;
 
     @Inject
     public LoginFragment() { }
@@ -117,9 +119,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
             @OnClick
             public void onClick(View v) {
 
-                getPresenter().onLoginButtonClicked(vEmailInput.getText().toString(),
-                        vPasswordInput.getText().toString());
-
+                getPresenter().isNetworkAvaliable(getContext());
             }
         });
 
