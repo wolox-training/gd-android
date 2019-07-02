@@ -57,7 +57,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         vTermsConditionsText.setMovementMethod(LinkMovementMethod.getInstance());
 
         getPresenter().setPreferencesConf(getContext(),
-                getString(R.string.preferences_name),   
+                getString(R.string.preferences_name),
                 getString(R.string.login_email),
                 getString(R.string.login_pass));
 
@@ -168,7 +168,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     }
 
     @Override
-    public void onLoginButtonPressed() {
+    public void onLoginSuccesfully() {
         Intent intent = new Intent(getActivity(), HomeActivity.class);
         startActivity(intent);
     }

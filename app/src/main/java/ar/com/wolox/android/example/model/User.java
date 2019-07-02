@@ -2,10 +2,12 @@ package ar.com.wolox.android.example.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * User Class
  */
-public class User {
+public class User implements Serializable {
 
     @SerializedName("id")
     private int id;
@@ -17,16 +19,16 @@ public class User {
     private String password;
     private UserComplements mUserComplements;
 
-    // Constructor vacio para instanciar
+    // Empty constructor for instance
     public User() {
     }
 
-    // Constructor para @GET de login
+    // @GET constructor for login
     public User(String email) {
         this.email = email;
     }
 
-    // Constructor sobrecargado
+    // Overloaded constructor
     public User(int id, String username, String email, String password, UserComplements userComplements) {
         this.id = id;
         this.username = username;
