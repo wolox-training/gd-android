@@ -57,7 +57,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         vTermsConditionsText.setMovementMethod(LinkMovementMethod.getInstance());
 
         getPresenter().setPreferencesConf(getContext(),
-                getString(R.string.preferences_name),
+                getString(R.string.preferences_name),   
                 getString(R.string.login_email),
                 getString(R.string.login_pass));
 

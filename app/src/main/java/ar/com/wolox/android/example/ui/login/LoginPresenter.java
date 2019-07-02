@@ -6,7 +6,6 @@ import java.util.List;
 
 import ar.com.wolox.android.R;
 import ar.com.wolox.android.example.model.User;
-import ar.com.wolox.android.example.network.RetrofitInstance;
 import ar.com.wolox.android.example.network.UserService;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -17,6 +16,7 @@ import java.util.regex.Pattern;
 
 import ar.com.wolox.android.example.utils.UserSession;
 import ar.com.wolox.wolmo.core.presenter.BasePresenter;
+import ar.com.wolox.wolmo.networking.retrofit.RetrofitServices;
 import ar.com.wolox.wolmo.networking.retrofit.callback.NetworkCallback;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -32,6 +32,9 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     private String mPrefName;
     private String mPrefEmail;
     private String mPrefPass;
+
+    @Inject
+    RetrofitServices mRetrofiServices;
 
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
@@ -49,9 +52,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     public void onLoginButtonClicked(@Nullable String email, @Nullable String password) {
 
         if (validateFields(email, password)) {
-
-            UserService usuarioService = RetrofitInstance.getRetrofitInstance().create(UserService.class);
-            Call<List<User>> call = usuarioService.getUserLogin(email);
+            Call<List<User>> call = mRetrofiServices.getService(UserService.class).getUserLogin(email);
 
             call.enqueue(new NetworkCallback<List<User>>() {
 
