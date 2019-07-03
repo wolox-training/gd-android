@@ -30,6 +30,7 @@ import javax.inject.Inject;
  * A simple {@link WolmoFragment} subclass.
  */
 public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILoginView {
+
     @BindView(R.id.vLoginButton) Button vLoginButton;
     @BindView(R.id.vSignUpButton) Button vSignUpButton;
     @BindView(R.id.vEmailInput) TextInputEditText vEmailInput;
@@ -73,7 +74,6 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
      */
     public void setListeners() {
         vEmailInput.addTextChangedListener(new TextWatcher() {
-
             @OnTextChanged
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -118,6 +118,8 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
             @OnClick
             public void onClick(View v) {
+                dialog = ProgressDialog.show(getActivity(), getText(R.string.login_dialog_title),
+                        getText(R.string.login_dialog_message), true);
 
                 getPresenter().isNetworkAvaliable(getContext());
             }
@@ -144,10 +146,14 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     @Override
     public void showLoginSuccess() {
+        getPresenter().onLoginButtonClicked(vEmailInput.getText().toString(),
+                vPasswordInput.getText().toString());
     }
 
     @Override
     public void showLoginFailure(int error) {
+        dialog.dismiss();
+
         Toast.makeText(getActivity(), getText(error), Toast.LENGTH_SHORT).show();
 
     }
