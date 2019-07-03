@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import ar.com.wolox.android.R;
 import ar.com.wolox.android.example.model.User;
 import ar.com.wolox.android.example.network.UserService;
+import ar.com.wolox.android.example.ui.example.ExampleActivity;
 import ar.com.wolox.wolmo.core.activity.WolmoActivity;
 import ar.com.wolox.wolmo.networking.retrofit.RetrofitServices;
 import ar.com.wolox.wolmo.networking.retrofit.callback.NetworkCallback;
@@ -29,11 +30,11 @@ public class RootActivity extends WolmoActivity {
 
     SharedPreferences sharedPref;
     String email, password, defaultValue;
-    Intent intent;
+    Intent intentHome, intentBase;
 
     @Override
     protected int layout() {
-        return R.layout.activity_root;
+        return R.layout.activity_base;
     }
 
     @Override
@@ -41,14 +42,16 @@ public class RootActivity extends WolmoActivity {
         sharedPref = this.getSharedPreferences(
                 getString(R.string.preferences_name), Context.MODE_PRIVATE);
 
-        intent = new Intent(this, HomeActivity.class);
-
         defaultValue = getString(R.string.prefs_default_value);
         email = sharedPref.getString(getString(R.string.login_email), defaultValue);
         password = sharedPref.getString(getString(R.string.login_pass), defaultValue);
 
+        intentBase = new Intent(this, ExampleActivity.class);
+        intentHome = new Intent(this, HomeActivity.class);
+
         if (email.isEmpty() || password.isEmpty()) {
-            replaceFragment(R.id.vActivityBaseContent, new LoginFragment());
+            startActivity(intentBase);
+            this.finish();
         } else {
             connectUser();
         }
@@ -67,20 +70,24 @@ public class RootActivity extends WolmoActivity {
             public void onResponseSuccessful(@Nullable List<User> response) {
 
                 if ((response.isEmpty()) || (!response.get(0).getPassword().equals(password))) {
-                    replaceFragment(R.id.vActivityBaseContent, new LoginFragment());
+                    startActivity(intentBase);
+                    finish();
                 } else {
-                    startActivity(intent);
+                    startActivity(intentHome);
+                    finish();
                 }
             }
 
             @Override
             public void onResponseFailed(@Nullable ResponseBody responseBody, int code) {
-                replaceFragment(R.id.vActivityBaseContent, new LoginFragment());
+                startActivity(intentBase);
+                finish();
             }
 
             @Override
             public void onCallFailure(Throwable t) {
-                replaceFragment(R.id.vActivityBaseContent, new LoginFragment());
+                startActivity(intentBase);
+                finish();
             }
         });
     }
