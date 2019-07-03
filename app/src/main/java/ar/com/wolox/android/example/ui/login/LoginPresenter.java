@@ -146,7 +146,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                 sharedPref.getString(prefPass, defaultValue));
     }
 
-    public void isNetworkAvaliable(Context ctx) {
+    public void isNetworkAvaliable(@NonNull Context ctx) {
         ConnectivityManager connectivityManager = (ConnectivityManager) ctx
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||

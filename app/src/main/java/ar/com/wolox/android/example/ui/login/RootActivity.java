@@ -58,7 +58,7 @@ public class RootActivity extends WolmoActivity {
         intentHome.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         if (email.isEmpty() || password.isEmpty()) {
-            replaceFragment(R.id.vActivityBaseContent, new LoginFragment());
+            startActivity(intentBase);
         } else {
             if (isNetworkAvaliable(getApplicationContext())) {
                 connectUser();
