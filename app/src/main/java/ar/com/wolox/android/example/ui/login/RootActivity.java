@@ -73,23 +73,19 @@ public class RootActivity extends WolmoActivity {
 
                 if ((response.isEmpty()) || (!response.get(0).getPassword().equals(password))) {
                     startActivity(intentBase);
-                    finish();
                 } else {
                     startActivity(intentHome);
-                    finish();
                 }
             }
 
             @Override
             public void onResponseFailed(@Nullable ResponseBody responseBody, int code) {
                 startActivity(intentBase);
-                finish();
             }
 
             @Override
             public void onCallFailure(Throwable t) {
                 startActivity(intentBase);
-                finish();
             }
         });
     }
