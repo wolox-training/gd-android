@@ -47,11 +47,13 @@ public class RootActivity extends WolmoActivity {
         password = sharedPref.getString(getString(R.string.login_pass), defaultValue);
 
         intentBase = new Intent(this, ExampleActivity.class);
+        intentBase.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
         intentHome = new Intent(this, HomeActivity.class);
+        intentHome.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         if (email.isEmpty() || password.isEmpty()) {
             startActivity(intentBase);
-            this.finish();
         } else {
             connectUser();
         }
