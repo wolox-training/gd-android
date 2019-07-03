@@ -124,10 +124,14 @@ dependencies {
     implementation "androidx.legacy:legacy-support-v4:$legacy_support_v4"
     implementation "androidx.appcompat:appcompat:$appcompat_appcompat"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
+<<<<<<< 308551240a858404291abef933f330440f74cd0c
 <<<<<<< 7695e23f3f1eeffcf25948879232819097d5a278
     implementation "com.google.android.material:material:$androidx_material_version"
 =======
 >>>>>>> Login acceso (#3)
+=======
+    implementation "com.google.android.material:material:$androidx_material_version"
+>>>>>>> U2 login validacion (#4)
     implementation "com.android.support.constraint:constraint-layout:$constraintlayout"
 
     // Dagger
