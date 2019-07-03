@@ -1,10 +1,8 @@
 package ar.com.wolox.android.example.ui.login;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 import ar.com.wolox.android.R;
 import ar.com.wolox.android.example.model.User;
@@ -14,6 +12,9 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Patterns;
+
+import androidx.annotation.NonNull;
+import java.util.regex.Pattern;
 
 import ar.com.wolox.android.example.utils.UserSession;
 import ar.com.wolox.wolmo.core.presenter.BasePresenter;
