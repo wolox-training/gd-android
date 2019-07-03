@@ -17,6 +17,7 @@ public final class RetrofitInstance {
      *
      * @return RET
      */
+
     private RetrofitInstance() {
         //not called
     }

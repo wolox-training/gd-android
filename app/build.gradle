@@ -123,8 +123,8 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:$androidx_recycler_version"
     implementation "androidx.legacy:legacy-support-v4:$legacy_support_v4"
     implementation "androidx.appcompat:appcompat:$appcompat_appcompat"
-    implementation "com.google.android.material:material:$androidx_material_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
+    implementation "com.google.android.material:material:$androidx_material_version"
     implementation "com.android.support.constraint:constraint-layout:$constraintlayout"
 
     // Dagger

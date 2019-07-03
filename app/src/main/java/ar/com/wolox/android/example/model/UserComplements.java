@@ -8,7 +8,6 @@ import java.io.Serializable;
  * UserComplements
  */
 public class UserComplements implements Serializable {
-
     @SerializedName("picture")
     private String picture;
     @SerializedName("cover")
