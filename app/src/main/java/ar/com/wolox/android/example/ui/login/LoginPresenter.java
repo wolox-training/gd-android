@@ -9,6 +9,8 @@ import ar.com.wolox.android.example.model.User;
 import ar.com.wolox.android.example.network.UserService;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Patterns;
 
 import androidx.annotation.NonNull;
@@ -52,7 +54,6 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     public void onLoginButtonClicked(@Nullable String email, @Nullable String password) {
 
         if (validateFields(email, password)) {
-
             Call<List<User>> call = mRetrofiServices.getService(UserService.class).getUserLogin(email);
 
             call.enqueue(new NetworkCallback<List<User>>() {
@@ -142,7 +143,18 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                                       @Nullable String defaultValue) {
 
         getView().setInitialCredentials(sharedPref.getString(prefEmail, defaultValue),
-        sharedPref.getString(prefPass, defaultValue));
+                sharedPref.getString(prefPass, defaultValue));
+    }
+
+    public void isNetworkAvaliable(@NonNull Context ctx) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) ctx
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            getView().showLoginSuccess();
+        } else {
+            getView().showLoginFailure(R.string.error_internet_connection);
+        }
     }
 
 }

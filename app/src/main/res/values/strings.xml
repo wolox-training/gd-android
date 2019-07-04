@@ -15,6 +15,7 @@
 
     <string name="preferences_name">ar.com.wolox.android.example.ui.login</string>
     <string name="prefs_default_value" />
+    <string name="error_internet_connection">Check your network connection</string>
 
     <!-- Login -->
     <string name="login_email">Email</string>
@@ -27,6 +28,9 @@
     <string name="login_pass_error">Field Password is required</string>
     <string name="login_error_credentials">Login failed. Check your credentials</string>
     <string name="login_error_service">Error while logging. Try again later</string>
+    <string name="login_dialog_title">Logging in</string>
+    <string name="login_dialog_message">Please wait…</string>
+
 
     <!-- Home -->
     <string name="home_text">HOME PAGE</string>
