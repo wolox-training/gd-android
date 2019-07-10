@@ -118,8 +118,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
             @OnClick
             public void onClick(View v) {
-                dialog = ProgressDialog.show(getActivity(), getText(R.string.login_dialog_title),
-                        getText(R.string.login_dialog_message), true);
+                showLoading();
 
                 getPresenter().isNetworkAvaliable(getContext());
             }
@@ -148,11 +147,13 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     public void showLoginSuccess() {
         getPresenter().onLoginButtonClicked(vEmailInput.getText().toString(),
                 vPasswordInput.getText().toString());
+
+        dismissLoading();
     }
 
     @Override
     public void showLoginFailure(int error) {
-        dialog.dismiss();
+        dismissLoading();
 
         Toast.makeText(getActivity(), getText(error), Toast.LENGTH_SHORT).show();
 
@@ -178,6 +179,38 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         Intent intent = new Intent(getActivity(), HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    @Override
+    public void showLoading() {
+        dialog = new ProgressDialog(getActivity());
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setTitle(R.string.login_dialog_title);
+        dialog.setMessage(requireActivity().getBaseContext().getResources().getString(R.string.login_dialog_message));
+        dialog.show();
+    }
+
+    @Override
+    public void dismissLoading() {
+        dialog.dismiss();
+    }
+
+    @Override
+    public void onGetUserByMailFinished(Boolean userIsFound) {
+        if (userIsFound) {
+            Intent intent = new Intent(getActivity(), HomeActivity.class);
+            startActivity(intent);
+        } else {
+            Toast toast;
+            toast = Toast.makeText(getContext(), getResources().getString(R.string.login_error_credentials), Toast.LENGTH_LONG);
+            toast.show();
+        }
+    }
+
+    @Override
+    public void failedApiConnection() {
+        Toast toast = Toast.makeText(getContext(), getResources().getString(R.string.login_error_service), Toast.LENGTH_SHORT);
+        toast.show();
     }
 
 }
