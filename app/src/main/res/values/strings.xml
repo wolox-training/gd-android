@@ -30,6 +30,9 @@
 
     <!-- Home -->
     <string name="home_text">HOME PAGE</string>
+    <string name="home_news">NEWS PAGE</string>
+    <string name="home_profile">PROFILE PAGE</string>
+    <string name="wolox">WOLOX</string>
 
     <!-- Register -->
     <string name="register_text">REGISTER ACTIVITY</string>

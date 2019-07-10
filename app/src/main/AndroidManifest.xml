@@ -19,13 +19,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".example.ui.login.RegisterActivity" />
-        <activity android:name=".example.ui.login.HomeActivity" />
         <activity
             android:name=".example.ui.example.ExampleActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".example.ui.viewpager.ViewPagerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".example.ui.home.HomeActivity"
             android:screenOrientation="portrait" />
     </application>
 
