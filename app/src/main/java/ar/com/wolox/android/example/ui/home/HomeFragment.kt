@@ -23,8 +23,6 @@ class HomeFragment @javax.inject.Inject constructor() : WolmoFragment<BasePresen
     @Inject
     internal lateinit var profileFragment: ProfileFragment
     private lateinit var fragmentPagerAdapter: SimpleFragmentPagerAdapter
-    private val NEWS_TAB = 0
-    private val PROFILE_TAB = 1
 
     override fun layout(): Int = R.layout.fragment_home
 
@@ -77,4 +75,10 @@ class HomeFragment @javax.inject.Inject constructor() : WolmoFragment<BasePresen
             })
         }
     }
+
+    companion object {
+        private const val NEWS_TAB = 0
+        private const val PROFILE_TAB = 1
+    }
 }
+
