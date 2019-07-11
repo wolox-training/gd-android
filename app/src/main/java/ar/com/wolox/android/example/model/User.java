@@ -8,7 +8,6 @@ import java.io.Serializable;
  * User Class
  */
 public class User implements Serializable {
-
     @SerializedName("id")
     private int id;
     @SerializedName("username")

@@ -125,7 +125,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appcompat_appcompat"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
     implementation "com.google.android.material:material:$androidx_material_version"
-    implementation "com.android.support.constraint:constraint-layout:$constraintlayout"
+
 
     // Dagger
     implementation "com.google.dagger:dagger:$dagger_version"

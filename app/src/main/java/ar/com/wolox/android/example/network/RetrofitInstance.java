@@ -13,11 +13,6 @@ public final class RetrofitInstance {
     private static Retrofit retrofit;
     private static final String BASE_URL = "https://android-training.herokuapp.com/";
 
-    /**
-     *
-     * @return RET
-     */
-
     private RetrofitInstance() {
         //not called
     }

@@ -1,5 +1,6 @@
 package ar.com.wolox.android.example.ui.login;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -38,6 +39,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     @BindView(R.id.vTermsConditionsText) TextView vTermsConditionsText;
 
     SharedPreferences sharedPref;
+    ProgressDialog dialog;
 
     @Inject
     public LoginFragment() { }
@@ -117,10 +119,8 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
             @OnClick
             public void onClick(View v) {
-
-                getPresenter().onLoginButtonClicked(vEmailInput.getText().toString(),
-                        vPasswordInput.getText().toString());
-
+                showLoading();
+                getPresenter().isNetworkAvaliable(getContext());
             }
         });
 
@@ -145,12 +145,17 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     @Override
     public void showLoginSuccess() {
+        getPresenter().onLoginButtonClicked(vEmailInput.getText().toString(),
+                vPasswordInput.getText().toString());
+      
+        dismissLoading();
     }
 
     @Override
     public void showLoginFailure(int error) {
-        Toast.makeText(getActivity(), getText(error), Toast.LENGTH_SHORT).show();
+        dismissLoading();
 
+        Toast.makeText(getActivity(), getText(error), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -173,6 +178,35 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         Intent intent = new Intent(getActivity(), HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    @Override
+    public void showLoading() {
+        dialog = new ProgressDialog(getActivity());
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setTitle(R.string.login_dialog_title);
+        dialog.setMessage(getString(R.string.login_dialog_message));
+        dialog.show();
+    }
+
+    @Override
+    public void dismissLoading() {
+        dialog.dismiss();
+    }
+
+    @Override
+    public void onGetUserByMailFinished(Boolean userIsFound) {
+        if (userIsFound) {
+            Intent intent = new Intent(getActivity(), HomeActivity.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(getContext(), getResources().getString(R.string.login_error_credentials), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void failedApiConnection() {
+        Toast.makeText(getContext(), getResources().getString(R.string.login_error_service), Toast.LENGTH_SHORT).show();
     }
 
 }
