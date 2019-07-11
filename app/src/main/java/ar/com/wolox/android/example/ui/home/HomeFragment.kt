@@ -43,38 +43,38 @@ class HomeFragment @javax.inject.Inject constructor() : WolmoFragment<BasePresen
                 Pair<Fragment, String>(profileFragment, getString(R.string.home_profile_title)))
         vViewPager.adapter = fragmentPagerAdapter
 
-        vTabs.apply {
+        vHomeTabs.apply {
             setupWithViewPager(vViewPager)
             getTabAt(NEWS_TAB)!!.setIcon(R.drawable.ic_news_list_on)
             getTabAt(PROFILE_TAB)!!.setIcon(R.drawable.ic_profile_off)
+
+            vHomeTabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    when (tab?.position) {
+                        NEWS_TAB -> {
+                            tab.setIcon(R.drawable.ic_news_list_on)
+                        }
+                        PROFILE_TAB -> {
+                            tab.setIcon(R.drawable.ic_profile_on)
+                        }
+                    }
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
+                    when (tab?.position) {
+                        NEWS_TAB -> {
+                            tab.setIcon(R.drawable.ic_news_list_off)
+                        }
+                        PROFILE_TAB -> {
+                            tab.setIcon(R.drawable.ic_profile_off)
+                        }
+                    }
+                }
+
+                override fun onTabReselected(p0: TabLayout.Tab?) {
+                    // This method must be empty
+                }
+            })
         }
-
-        vTabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                when (tab?.position) {
-                    NEWS_TAB -> {
-                        tab.setIcon(R.drawable.ic_news_list_on)
-                    }
-                    PROFILE_TAB -> {
-                        tab.setIcon(R.drawable.ic_profile_on)
-                    }
-                }
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-                when (tab?.position) {
-                    NEWS_TAB -> {
-                        tab.setIcon(R.drawable.ic_news_list_off)
-                    }
-                    PROFILE_TAB -> {
-                        tab.setIcon(R.drawable.ic_profile_off)
-                    }
-                }
-            }
-
-            override fun onTabReselected(p0: TabLayout.Tab?) {
-                // This method must be empty
-            }
-        })
     }
 }
