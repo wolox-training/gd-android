@@ -23,17 +23,18 @@ class HomeFragment @javax.inject.Inject constructor() : WolmoFragment<BasePresen
     @Inject
     internal lateinit var profileFragment: ProfileFragment
     private lateinit var fragmentPagerAdapter: SimpleFragmentPagerAdapter
-
-    private val newsTab = 0
-    private val profileTab = 1
+    private val NEWS_TAB = 0
+    private val PROFILE_TAB = 1
 
     override fun layout(): Int = R.layout.fragment_home
 
     override fun init() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            activity!!.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            activity!!.window.statusBarColor = ContextCompat.getColor(activity!!.baseContext, android.R.color.transparent)
-            activity!!.window.setBackgroundDrawableResource(R.drawable.gradient_background_wolox)
+            requireActivity().window.apply {
+                addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+                statusBarColor = ContextCompat.getColor(activity!!.baseContext, android.R.color.transparent)
+                setBackgroundDrawableResource(R.drawable.gradient_background_wolox)
+            }
         }
 
         fragmentPagerAdapter = SimpleFragmentPagerAdapter(childFragmentManager)
@@ -42,18 +43,19 @@ class HomeFragment @javax.inject.Inject constructor() : WolmoFragment<BasePresen
                 Pair<Fragment, String>(profileFragment, getString(R.string.home_profile_title)))
         vViewPager.adapter = fragmentPagerAdapter
 
-        vTabs.setupWithViewPager(vViewPager)
-
-        vTabs.getTabAt(newsTab)!!.setIcon(R.drawable.ic_news_list_on)
-        vTabs.getTabAt(profileTab)!!.setIcon(R.drawable.ic_profile_off)
+        vTabs.apply {
+            setupWithViewPager(vViewPager)
+            getTabAt(NEWS_TAB)!!.setIcon(R.drawable.ic_news_list_on)
+            getTabAt(PROFILE_TAB)!!.setIcon(R.drawable.ic_profile_off)
+        }
 
         vTabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
-                    newsTab -> {
+                    NEWS_TAB -> {
                         tab.setIcon(R.drawable.ic_news_list_on)
                     }
-                    profileTab -> {
+                    PROFILE_TAB -> {
                         tab.setIcon(R.drawable.ic_profile_on)
                     }
                 }
@@ -61,17 +63,17 @@ class HomeFragment @javax.inject.Inject constructor() : WolmoFragment<BasePresen
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
-                    newsTab -> {
+                    NEWS_TAB -> {
                         tab.setIcon(R.drawable.ic_news_list_off)
                     }
-                    1 -> {
+                    PROFILE_TAB -> {
                         tab.setIcon(R.drawable.ic_profile_off)
                     }
                 }
             }
 
             override fun onTabReselected(p0: TabLayout.Tab?) {
-                //
+                // This method must be empty
             }
         })
     }
