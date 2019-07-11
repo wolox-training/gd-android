@@ -30,5 +30,4 @@ public interface ILoginView {
     void onGetUserByMailFinished(Boolean userIsFound);
 
     void failedApiConnection();
-
 }

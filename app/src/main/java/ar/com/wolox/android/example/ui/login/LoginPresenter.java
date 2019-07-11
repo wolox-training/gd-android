@@ -14,7 +14,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-
 import androidx.annotation.NonNull;
 
 import org.jetbrains.annotations.NotNull;
@@ -211,3 +210,4 @@ public class LoginPresenter extends BasePresenter<ILoginView> implements OnLogin
         getView().failedApiConnection();
     }
 }
+

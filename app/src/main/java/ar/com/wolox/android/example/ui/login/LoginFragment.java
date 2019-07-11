@@ -119,7 +119,6 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
             @OnClick
             public void onClick(View v) {
                 showLoading();
-
                 getPresenter().isNetworkAvaliable(getContext());
             }
         });
@@ -147,7 +146,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     public void showLoginSuccess() {
         getPresenter().onLoginButtonClicked(vEmailInput.getText().toString(),
                 vPasswordInput.getText().toString());
-
+      
         dismissLoading();
     }
 
@@ -156,7 +155,6 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         dismissLoading();
 
         Toast.makeText(getActivity(), getText(error), Toast.LENGTH_SHORT).show();
-
     }
 
     @Override
