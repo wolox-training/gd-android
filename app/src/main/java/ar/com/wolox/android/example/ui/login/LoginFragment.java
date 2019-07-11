@@ -186,7 +186,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         dialog = new ProgressDialog(getActivity());
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.setTitle(R.string.login_dialog_title);
-        dialog.setMessage(requireActivity().getBaseContext().getResources().getString(R.string.login_dialog_message));
+        dialog.setMessage(getString(R.string.login_dialog_message));
         dialog.show();
     }
 
@@ -201,16 +201,13 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
             Intent intent = new Intent(getActivity(), HomeActivity.class);
             startActivity(intent);
         } else {
-            Toast toast;
-            toast = Toast.makeText(getContext(), getResources().getString(R.string.login_error_credentials), Toast.LENGTH_LONG);
-            toast.show();
+            Toast.makeText(getContext(), getResources().getString(R.string.login_error_credentials), Toast.LENGTH_LONG).show();
         }
     }
 
     @Override
     public void failedApiConnection() {
-        Toast toast = Toast.makeText(getContext(), getResources().getString(R.string.login_error_service), Toast.LENGTH_SHORT);
-        toast.show();
+        Toast.makeText(getContext(), getResources().getString(R.string.login_error_service), Toast.LENGTH_SHORT).show();
     }
 
 }

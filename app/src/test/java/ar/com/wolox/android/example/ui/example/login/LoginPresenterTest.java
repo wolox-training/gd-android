@@ -30,6 +30,7 @@ public class LoginPresenterTest {
     private final String VALID_EMAIL = "susan.stevens38@example.com";
     private final String INVALID_PASSWORD = "asdasdasd";
     private final String VALID_PASSWORD = "12345678";
+    private final int invocationNumber = 1;
 
     @Before
     public void setupTestMailIsEmpty() {
@@ -56,7 +57,7 @@ public class LoginPresenterTest {
     @Test
     public void testShowDialog() {
         loginPresenter.getUserByMail(VALID_EMAIL, INVALID_PASSWORD);
-        verify(loginView, times(1)).showLoading();
+        verify(loginView, times(invocationNumber)).showLoading();
     }
 
     @Test
@@ -66,7 +67,7 @@ public class LoginPresenterTest {
             return invocation;
         }).when(apiAdapter).getUserById(anyString(), anyString(), any());
         loginPresenter.getUserByMail(VALID_EMAIL, VALID_PASSWORD);
-        verify(loginView, times(1)).onGetUserByMailFinished(true);
+        verify(loginView, times(invocationNumber)).onGetUserByMailFinished(true);
     }
 
     @Test
@@ -76,7 +77,7 @@ public class LoginPresenterTest {
             return invocation;
         }).when(apiAdapter).getUserById(anyString(), anyString(), any());
         loginPresenter.getUserByMail(VALID_EMAIL, INVALID_PASSWORD);
-        verify(loginView, times(1)).failedApiConnection();
+        verify(loginView, times(invocationNumber)).failedApiConnection();
     }
 
     @Test
@@ -86,7 +87,7 @@ public class LoginPresenterTest {
             return invocation;
         }).when(apiAdapter).getUserById(anyString(), anyString(), any());
         loginPresenter.getUserByMail(VALID_EMAIL, INVALID_PASSWORD);
-        verify(loginView, times(1)).onGetUserByMailFinished(false);
+        verify(loginView, times(invocationNumber)).onGetUserByMailFinished(false);
     }
 
 }
