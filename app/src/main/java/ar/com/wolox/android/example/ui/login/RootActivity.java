@@ -18,6 +18,7 @@ import ar.com.wolox.android.R;
 import ar.com.wolox.android.example.model.User;
 import ar.com.wolox.android.example.network.UserService;
 import ar.com.wolox.android.example.ui.example.ExampleActivity;
+import ar.com.wolox.android.example.ui.home.HomeActivity;
 import ar.com.wolox.wolmo.core.activity.WolmoActivity;
 import ar.com.wolox.wolmo.networking.retrofit.RetrofitServices;
 import ar.com.wolox.wolmo.networking.retrofit.callback.NetworkCallback;
