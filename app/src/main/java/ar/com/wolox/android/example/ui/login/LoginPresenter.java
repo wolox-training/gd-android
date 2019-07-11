@@ -5,15 +5,19 @@ import androidx.annotation.Nullable;
 import java.util.List;
 
 import ar.com.wolox.android.R;
+import ar.com.wolox.android.example.model.APIClient;
 import ar.com.wolox.android.example.model.User;
+import ar.com.wolox.android.example.network.APIAdapter;
+import ar.com.wolox.android.example.network.OnLoginListener;
 import ar.com.wolox.android.example.network.UserService;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Patterns;
-
 import androidx.annotation.NonNull;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.util.regex.Pattern;
 
 import ar.com.wolox.android.example.utils.UserSession;
@@ -28,12 +32,14 @@ import javax.inject.Inject;
 /**
  * A simple {@link BasePresenter} subclass.
  */
-public class LoginPresenter extends BasePresenter<ILoginView> {
+public class LoginPresenter extends BasePresenter<ILoginView> implements OnLoginListener {
 
     private UserSession mUserSession;
     private String mPrefName;
     private String mPrefEmail;
     private String mPrefPass;
+    private APIAdapter apiAdapter;
+    private UserService userService;
 
     @Inject
     RetrofitServices mRetrofiServices;
@@ -41,9 +47,14 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
 
-    @Inject
     public LoginPresenter() {
 
+    }
+
+    @Inject
+    public LoginPresenter(APIAdapter apiAdapter) {
+        this.apiAdapter = apiAdapter;
+        userService = APIClient.getRetrofitClient().create(UserService.class);
     }
 
     /**
@@ -99,7 +110,13 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
         }
     }
 
-    private Boolean validateFields(@Nullable String email, @Nullable String pass) {
+    /**
+     *
+     * @param email email
+     * @param pass pass
+     * @return fieldsValidate
+     */
+    public Boolean validateFields(@Nullable String email, @Nullable String pass) {
         Boolean fieldsValidate = true;
 
         if (email.isEmpty()) {
@@ -120,9 +137,16 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
         return fieldsValidate;
     }
 
-    private Boolean validateEmail(@NonNull String email) {
-        Pattern pattern = Patterns.EMAIL_ADDRESS;
+    public Boolean validateEmail(@NonNull String email) {
+        String mailPattern;
+        Pattern pattern;
+        mailPattern = "^[A-Za-z0-9._%+\\-]+@[A-Za-z0-9.\\-]+\\.[A-Za-z]{2,4}$";
+        pattern = Pattern.compile(mailPattern);
         return pattern.matcher(email).matches();
+    }
+
+    public Boolean mailIsEmpty(@NotNull String email) {
+        return email.isEmpty();
     }
 
     public void setPreferencesConf(@NonNull Context context, @NonNull String prefName,
@@ -157,4 +181,33 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
         }
     }
 
+    public void getUserByMail(String mail, String password) {
+        if (validateEmail(mail)) {
+            apiAdapter.getUserById(mail, password, this);
+            getView().showLoading();
+        }
+    }
+
+    public void dismissLoading() {
+        getView().dismissLoading();
+    }
+
+    @Override
+    public void onLoginSuccess() {
+        dismissLoading();
+        getView().onGetUserByMailFinished(true);
+    }
+
+    @Override
+    public void onLoginUserNotFound() {
+        dismissLoading();
+        getView().onGetUserByMailFinished(false);
+    }
+
+    @Override
+    public void onLoginFail() {
+        dismissLoading();
+        getView().failedApiConnection();
+    }
 }
+

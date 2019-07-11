@@ -17,4 +17,9 @@ public interface UserService {
             @Query("email") String email
     );
 
+    @GET("/users")
+    Call<List<User>> getUserByMail(
+            @Query("email") String mail,
+            @Query("password") String password);
+
 }

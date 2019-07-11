@@ -22,4 +22,12 @@ public interface ILoginView {
 
     void setInitialCredentials(@Nullable String email, @Nullable String password);
 
+    //Created for tests
+    void showLoading();
+
+    void dismissLoading();
+
+    void onGetUserByMailFinished(Boolean userIsFound);
+
+    void failedApiConnection();
 }
