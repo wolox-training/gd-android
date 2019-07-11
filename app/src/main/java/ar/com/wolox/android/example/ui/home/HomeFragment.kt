@@ -24,7 +24,10 @@ class HomeFragment @javax.inject.Inject constructor() : WolmoFragment<BasePresen
     internal lateinit var profileFragment: ProfileFragment
     private lateinit var fragmentPagerAdapter: SimpleFragmentPagerAdapter
 
-    override fun layout(): Int = ar.com.wolox.android.R.layout.fragment_home
+    private val newsTab = 0
+    private val profileTab = 1
+
+    override fun layout(): Int = R.layout.fragment_home
 
     override fun init() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -35,36 +38,38 @@ class HomeFragment @javax.inject.Inject constructor() : WolmoFragment<BasePresen
 
         fragmentPagerAdapter = SimpleFragmentPagerAdapter(childFragmentManager)
         fragmentPagerAdapter.addFragments(
-                Pair<Fragment, String>(newsFragment, "News"),
-                Pair<Fragment, String>(profileFragment, "Profile"))
+                Pair<Fragment, String>(newsFragment, getString(R.string.home_news_title)),
+                Pair<Fragment, String>(profileFragment, getString(R.string.home_profile_title)))
         vViewPager.adapter = fragmentPagerAdapter
 
         vTabs.setupWithViewPager(vViewPager)
 
-        vTabs.getTabAt(0)!!.setIcon(ar.com.wolox.android.R.drawable.ic_news_list_on)
-        vTabs.getTabAt(1)!!.setIcon(ar.com.wolox.android.R.drawable.ic_profile_off)
+        vTabs.getTabAt(newsTab)!!.setIcon(R.drawable.ic_news_list_on)
+        vTabs.getTabAt(profileTab)!!.setIcon(R.drawable.ic_profile_off)
 
         vTabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
-                    0 -> {
-                        tab.setIcon(ar.com.wolox.android.R.drawable.ic_news_list_on)
+                    newsTab -> {
+                        tab.setIcon(R.drawable.ic_news_list_on)
                     }
-                    1 -> {
-                        tab.setIcon(ar.com.wolox.android.R.drawable.ic_profile_on)
+                    profileTab -> {
+                        tab.setIcon(R.drawable.ic_profile_on)
                     }
                 }
             }
+
             override fun onTabUnselected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
-                    0 -> {
-                        tab.setIcon(ar.com.wolox.android.R.drawable.ic_news_list_off)
+                    newsTab -> {
+                        tab.setIcon(R.drawable.ic_news_list_off)
                     }
                     1 -> {
-                        tab.setIcon(ar.com.wolox.android.R.drawable.ic_profile_off)
+                        tab.setIcon(R.drawable.ic_profile_off)
                     }
                 }
             }
+
             override fun onTabReselected(p0: TabLayout.Tab?) {
                 //
             }
