@@ -38,7 +38,6 @@ public class APIAdapter {
                         listener.onLoginUserNotFound();
                     }
                 }
-
             }
 
             @Override
