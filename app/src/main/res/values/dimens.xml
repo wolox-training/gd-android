@@ -48,5 +48,8 @@
     <!-- Add your custom dimens here -->
     <dimen name="login_weight_one">1</dimen>
     <dimen name="login_weight_two">2</dimen>
+    <dimen name="viewholder_news_container">110dp</dimen>
+    <dimen name="news_picture_radius">5dp</dimen>
+    <dimen name="news_picture_size">70dp</dimen>
 
 </resources>

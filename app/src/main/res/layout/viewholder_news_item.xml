@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/viewholder_news_container"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/vRelativeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/vNewsImage"
+            android:layout_width="@dimen/news_picture_size"
+            android:layout_height="@dimen/news_picture_size"
+            android:layout_marginStart="@dimen/static_spacing_large"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginEnd="@dimen/spacing_large"
+            android:background="@color/light_gray" />
+
+        <TextView
+            android:id="@+id/vTimeAgo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/static_spacing_large"
+            android:layout_marginEnd="@dimen/spacing_large"
+            android:layout_marginRight="@dimen/static_spacing_large"
+            android:text="@string/news_time" />
+
+        <ImageButton
+            android:id="@+id/vFavButton"
+            android:layout_width="@dimen/news_picture_size"
+            android:layout_height="@dimen/news_picture_size"
+            android:layout_below="@id/vTimeAgo"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/static_spacing_large"
+            android:layout_marginEnd="@dimen/spacing_large"
+            android:background="@color/white"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_like_off" />
+
+        <TextView
+            android:id="@+id/vNewsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_toStartOf="@id/vTimeAgo"
+            android:layout_toEndOf="@id/vNewsImage"
+            android:text="@string/news_title"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_large" />
+
+        <TextView
+            android:id="@+id/vNewsBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/vNewsTitle"
+            android:layout_marginTop="@dimen/static_spacing_medium"
+            android:layout_toStartOf="@id/vTimeAgo"
+            android:layout_toEndOf="@id/vNewsImage"
+            android:text="@string/news_body"
+            android:textSize="@dimen/font_large" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_tiniest"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/static_spacing_medium"
+            android:background="@color/super_light_gray" />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
