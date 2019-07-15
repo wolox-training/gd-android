@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context="ar.com.wolox.android.example.ui.news.NewsFragment">
 
+    <TextView
+        android:id="@+id/vNoNewsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/news_empty"
+        android:textSize="@dimen/font_big"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/news_absolute_y_nonews"
+        android:layout_marginLeft="@dimen/news_absolute_x_nonews"
+        android:visibility="invisible"/>
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/vSwipeRefreshNews"
         android:layout_width="match_parent"

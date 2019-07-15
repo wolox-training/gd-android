@@ -53,5 +53,7 @@
     <dimen name="news_picture_size">70dp</dimen>
     <dimen name="news_fab_like">35dp</dimen>
     <dimen name="news_body_width">250dp</dimen>
+    <dimen name="news_absolute_x_nonews">120dp</dimen>
+    <dimen name="news_absolute_y_nonews">350dp</dimen>
 
 </resources>
