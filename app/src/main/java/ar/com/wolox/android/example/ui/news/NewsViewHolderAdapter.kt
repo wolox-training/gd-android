@@ -6,13 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.ToggleButton
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
 import ar.com.wolox.android.example.model.News
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.view.SimpleDraweeView
+import androidx.recyclerview.widget.ListAdapter
 
-class NewsViewHolderAdapter : RecyclerView.Adapter<NewsViewHolderAdapter.ViewHolder>() {
+class NewsViewHolderAdapter : ListAdapter<News, NewsViewHolderAdapter.ViewHolder>(NewsAdapterCallBack()) {
 
     private var newsList = ArrayList<News>()
     private lateinit var view: View
@@ -59,9 +61,13 @@ class NewsViewHolderAdapter : RecyclerView.Adapter<NewsViewHolderAdapter.ViewHol
         var vNewsImage = item.findViewById<SimpleDraweeView>(R.id.vNewsImage)
         var vFavButton = item.findViewById<ToggleButton>(R.id.vFavButton)
     }
+}
 
-    companion object {
-        private const val LIKE_PRESSED = "pressed"
-        private const val LIKE_NON_PRESSED = "nonpressed"
+class NewsAdapterCallBack : DiffUtil.ItemCallback<News>() {
+    override fun areItemsTheSame(oldItem: News, newItem: News): Boolean {
+        return oldItem.id == newItem.id
+    }
+    override fun areContentsTheSame(oldItem: News, newItem: News): Boolean {
+        return (oldItem.title == newItem.title && oldItem.text == newItem.text)
     }
 }
