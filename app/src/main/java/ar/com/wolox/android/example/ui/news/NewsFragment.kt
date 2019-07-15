@@ -22,7 +22,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
             vSwipeRefreshNews.setColorSchemeResources(android.R.color.holo_blue_light)
             vSwipeRefreshNews.setOnRefreshListener {
                 vSwipeRefreshNews.isRefreshing = true
-                setNews(presenter.getNews())
+                presenter.getNews()
             }
         }
 
@@ -31,7 +31,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
             layoutManager = LinearLayoutManager(requireContext())
         }
 
-        setNews(presenter.getNews())
+        presenter.getNews()
 
         vFabBtn.attachToRecyclerView(vNewsRecyclerView)
         vFabBtn.apply {
@@ -42,7 +42,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
         }
     }
 
-    fun setNews(newsList: List<News>) {
+    override fun setNews(newsList: List<News>) {
         newsAdapter.setNews(newsList)
         newsAdapter.notifyDataSetChanged()
         stopRefreshing()

@@ -6,13 +6,13 @@ import javax.inject.Inject
 
 class NewsPresenter @Inject constructor() : BasePresenter<INewsView>() {
 
-    fun getNews(): ArrayList<News> {
+    fun getNews() {
         var newsList: ArrayList<News> = ArrayList()
 
         for (i in 1..9) {
             newsList.add(News(i, 1, "15min", "Ali Connors", "picture", "I'll be in your neighborhood doing errands"))
         }
 
-        return newsList
+        view.setNews(newsList)
     }
 }

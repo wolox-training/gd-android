@@ -7,6 +7,4 @@ data class News(
     var title: String,
     var picture: String,
     var text: String
-) {
-    // Keep it empty
-}
+)

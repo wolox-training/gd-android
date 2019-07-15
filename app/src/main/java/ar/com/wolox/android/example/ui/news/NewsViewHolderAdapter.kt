@@ -4,12 +4,13 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.TextView
+import android.widget.ToggleButton
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
 import ar.com.wolox.android.example.model.News
+import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.drawee.view.SimpleDraweeView
 
 class NewsViewHolderAdapter : RecyclerView.Adapter<NewsViewHolderAdapter.ViewHolder>() {
 
@@ -19,6 +20,7 @@ class NewsViewHolderAdapter : RecyclerView.Adapter<NewsViewHolderAdapter.ViewHol
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
+        Fresco.initialize(context)
         view = LayoutInflater.from(parent.context).inflate(R.layout.viewholder_news_item, parent, false)
         return ViewHolder(view)
     }
@@ -47,21 +49,6 @@ class NewsViewHolderAdapter : RecyclerView.Adapter<NewsViewHolderAdapter.ViewHol
             vNewsTitle.text = news.title
             vNewsBody.text = news.text
             vTimeAgo.text = news.createdAt
-
-            vFavButton.apply {
-                vFavButton.setOnClickListener() {
-                    when (vFavButton.tag) {
-                        LIKE_PRESSED -> {
-                            setImageResource(R.drawable.ic_like_off)
-                            tag = LIKE_NON_PRESSED
-                        }
-                        else -> {
-                            setImageResource(R.drawable.ic_like_on)
-                            tag = LIKE_PRESSED
-                        }
-                    }
-                }
-            }
         }
     }
 
@@ -69,8 +56,8 @@ class NewsViewHolderAdapter : RecyclerView.Adapter<NewsViewHolderAdapter.ViewHol
         var vTimeAgo = item.findViewById<TextView>(R.id.vTimeAgo)
         var vNewsTitle = item.findViewById<TextView>(R.id.vNewsTitle)
         var vNewsBody = item.findViewById<TextView>(R.id.vNewsBody)
-        var vNewsImage = item.findViewById<ImageView>(R.id.vNewsImage)
-        var vFavButton = item.findViewById<ImageButton>(R.id.vFavButton)
+        var vNewsImage = item.findViewById<SimpleDraweeView>(R.id.vNewsImage)
+        var vFavButton = item.findViewById<ToggleButton>(R.id.vFavButton)
     }
 
     companion object {
