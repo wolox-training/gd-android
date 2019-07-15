@@ -81,4 +81,3 @@ class HomeFragment @javax.inject.Inject constructor() : WolmoFragment<BasePresen
         private const val PROFILE_TAB = 1
     }
 }
-
