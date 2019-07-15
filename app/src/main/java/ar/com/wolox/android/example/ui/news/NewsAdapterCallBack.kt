@@ -8,6 +8,6 @@ class NewsAdapterCallBack : DiffUtil.ItemCallback<News>() {
         return oldItem.id == newItem.id
     }
     override fun areContentsTheSame(oldItem: News, newItem: News): Boolean {
-        return (oldItem.title == newItem.title && oldItem.text == newItem.text)
+        return (oldItem.title.equals(newItem.title) && oldItem.text.equals(newItem.text))
     }
 }
