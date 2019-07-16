@@ -10,15 +10,14 @@ import okhttp3.ResponseBody
 import javax.inject.Inject
 
 class NewsPresenter @Inject constructor(
-    private val mRetrofitServices: RetrofitServices
+    private val retrofitServices: RetrofitServices
 ) : BasePresenter<INewsView>() {
 
     fun getNews() {
 
-        val call = mRetrofitServices!!.getService(NewsService::class.java).getNews()
+        val call = retrofitServices!!.getService(NewsService::class.java).getNews()
 
         call.enqueue(object : NetworkCallback<List<News>>() {
-
             override fun onResponseSuccessful(response: List<News>?) {
 
                 if (response!!.isEmpty()) {

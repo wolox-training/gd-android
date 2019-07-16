@@ -45,24 +45,10 @@ class NewsViewHolderAdapter : ListAdapter<News, NewsViewHolderAdapter.ViewHolder
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val news = newsList[position]
-        val title: String
-        val body: String
-
-        if (news.title.length > 22) {
-            title = news.title.substring(0, 22) + "..."
-        } else {
-            title = news.title
-        }
-
-        if (news.text.length > 40) {
-            body = news.text.substring(0, 40) + "..."
-        } else {
-            body = news.text
-        }
 
         holder.apply {
-            vNewsTitle.text = title
-            vNewsBody.text = body
+            vNewsTitle.text = news.title
+            vNewsBody.text = news.text
             vTimeAgo.text = news.getTimeFormated()
 
             vNewsImage.setImageURI(news.picture)
