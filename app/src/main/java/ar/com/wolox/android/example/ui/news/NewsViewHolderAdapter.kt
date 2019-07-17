@@ -49,7 +49,9 @@ class NewsViewHolderAdapter : ListAdapter<News, NewsViewHolderAdapter.ViewHolder
         holder.apply {
             vNewsTitle.text = news.title
             vNewsBody.text = news.text
-            vTimeAgo.text = news.createdAt
+            vTimeAgo.text = news.getTimeFormated()
+
+            vNewsImage.setImageURI(news.picture)
         }
     }
 

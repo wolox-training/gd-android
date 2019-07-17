@@ -1,7 +1,9 @@
 package ar.com.wolox.android.example.ui.news
 
 import android.content.Intent
-import androidx.core.content.ContextCompat.startActivity
+import android.view.View
+import android.widget.Toast
+import androidx.core.content.res.TypedArrayUtils.getText
 import androidx.recyclerview.widget.LinearLayoutManager
 import ar.com.wolox.android.R
 import ar.com.wolox.android.example.model.News
@@ -43,6 +45,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
     }
 
     override fun setNews(newsList: List<News>) {
+        vNoNewsText.visibility = View.INVISIBLE
         newsAdapter.setNews(newsList)
         newsAdapter.notifyDataSetChanged()
         stopRefreshing()
@@ -50,5 +53,13 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
 
     fun stopRefreshing() {
         vSwipeRefreshNews.isRefreshing = false
+    }
+
+    override fun showAPIError(error: Int) {
+        Toast.makeText(activity, getText(error), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showNoNews() {
+        vNoNewsText.visibility = View.VISIBLE
     }
 }
