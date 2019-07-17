@@ -55,12 +55,12 @@
         android:text="@string/news_title"
         android:textColor="@color/black"
         android:textSize="@dimen/font_large"
+        android:maxLines="@integer/news_title_max_lines"
+        android:ellipsize="end"
         app:layout_constraintEnd_toStartOf="@+id/vTimeAgo"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/vNewsImage"
-        app:layout_constraintTop_toTopOf="parent"
-        android:maxLines="@integer/news_title_max_lines"
-        android:ellipsize="end"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/vNewsBody"
@@ -71,19 +71,17 @@
         android:layout_marginTop="@dimen/static_spacing_medium"
         android:text="@string/news_body"
         android:textSize="@dimen/font_large"
-        app:layout_constraintEnd_toStartOf="@+id/vFavButton"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/vNewsImage"
-        app:layout_constraintTop_toBottomOf="@+id/vNewsTitle"
         android:maxLines="@integer/news_body_max_lines"
-        android:ellipsize="end"/>
+        android:ellipsize="end"
+        app:layout_constraintEnd_toStartOf="@+id/vFavButton"
+        app:layout_constraintStart_toEndOf="@+id/vNewsImage"
+        app:layout_constraintTop_toBottomOf="@+id/vNewsTitle"/>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="@dimen/spacing_tiniest"
         android:layout_alignParentBottom="true"
         android:background="@color/super_light_gray"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="@dimen/spacing_none" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
