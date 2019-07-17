@@ -20,7 +20,7 @@ data class News(
         val formatter = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
         val dateTime = formatter.parseDateTime(createdAt)
         val prettyTime = PrettyTime(Locale.getDefault())
-        val ago: String = prettyTime.format(dateTime.toDate())
+        val ago = prettyTime.format(dateTime.toDate())
         return ago
     }
 }
