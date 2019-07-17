@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 import org.joda.time.format.DateTimeFormat
 import org.ocpsoft.prettytime.PrettyTime
 import java.util.Locale
+import java.io.Serializable
 
 data class News(
     var id: Int,
@@ -13,8 +14,11 @@ data class News(
     var createdAt: String,
     var title: String,
     var picture: String,
-    var text: String
-) {
+    var text: String,
+    @SerializedName("likes")
+    val likes: List<Int>? = null,
+    var like: Boolean = false
+) : Serializable {
 
     fun getTimeFormated(): String {
         val formatter = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ")

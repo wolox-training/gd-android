@@ -1,4 +1,4 @@
-package ar.com.wolox.android.example.ui.news
+package ar.com.wolox.android.example.ui.newsDetail
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -12,25 +12,23 @@ import ar.com.wolox.wolmo.networking.retrofit.callback.NetworkCallback
 import okhttp3.ResponseBody
 import javax.inject.Inject
 
-class NewsPresenter @Inject constructor(
+class NewsDetailPresenter @Inject constructor(
         private val retrofitServices: RetrofitServices
-) : BasePresenter<INewsView>() {
+) : BasePresenter<INewsDetailView>() {
 
     private lateinit var mPrefUserId: String
     private lateinit var mPrefName: String
     internal lateinit var sharedPref: SharedPreferences
 
-    fun getNews() {
+    fun getPost(id: Int) {
 
-        val call = retrofitServices!!.getService(NewsService::class.java).getNews()
+        val call = retrofitServices!!.getService(NewsService::class.java).getPostById(id)
 
-        call.enqueue(object : NetworkCallback<List<News>>() {
-            override fun onResponseSuccessful(response: List<News>?) {
+        call.enqueue(object : NetworkCallback<News>() {
+            override fun onResponseSuccessful(response: News?) {
 
-                if (response!!.isEmpty()) {
-                    view.showNoNews()
-                } else {
-                    view.setNews(response)
+                if (response != null) {
+                    view.getPost(response)
                 }
             }
 
@@ -85,6 +83,7 @@ class NewsPresenter @Inject constructor(
     ) {
         mPrefName = prefName
         mPrefUserId = prefUserId
+
         sharedPref = context.getSharedPreferences(mPrefName, Context.MODE_PRIVATE)
     }
 }

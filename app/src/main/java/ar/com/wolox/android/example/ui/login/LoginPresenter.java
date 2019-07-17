@@ -38,6 +38,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> implements OnLogin
     private String mPrefName;
     private String mPrefEmail;
     private String mPrefPass;
+    private String mPrefUserId;
     private APIAdapter apiAdapter;
     private UserService userService;
 
@@ -77,6 +78,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> implements OnLogin
                     } else {
                         editor.putString(mPrefEmail, email);
                         editor.putString(mPrefPass, password);
+                        editor.putInt(mPrefUserId, response.get(0).getId());
                         editor.commit();
 
                         getView().onLoginSuccesfully();
@@ -150,11 +152,13 @@ public class LoginPresenter extends BasePresenter<ILoginView> implements OnLogin
     }
 
     public void setPreferencesConf(@NonNull Context context, @NonNull String prefName,
-                                   @NonNull String prefEmail, @NonNull String prefPass) {
+                                   @NonNull String prefEmail, @NonNull String prefPass,
+                                   @NonNull String prefUserId) {
 
         mPrefEmail = prefEmail;
         mPrefPass = prefPass;
         mPrefName = prefName;
+        mPrefUserId = prefUserId;
 
         sharedPref = context.getSharedPreferences(mPrefName, Context.MODE_PRIVATE);
 

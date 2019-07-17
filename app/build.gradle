@@ -109,6 +109,7 @@ buildscript {
     ext.fresco = '2.0.0'
     ext.fab = '1.3.0'
     ext.prettytime = '4.0.1.Final'
+    ext.eventbus = '3.1.1'
 }
 
 dependencies {
@@ -128,7 +129,6 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appcompat"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
     implementation "com.google.android.material:material:$androidx_material_version"
-
 
     // Dagger
     implementation "com.google.dagger:dagger:$dagger_version"
@@ -167,4 +167,7 @@ dependencies {
 
     //Pretty time
     implementation "org.ocpsoft.prettytime:prettytime:$prettytime"
+
+    //Event Bus
+    implementation "org.greenrobot:eventbus:$eventbus"
 }

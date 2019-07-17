@@ -20,6 +20,7 @@
     <!-- Login -->
     <string name="login_email">Email</string>
     <string name="login_pass">Password</string>
+    <string name="login_user_id">userId</string>
     <string name="login_btn_login">Login</string>
     <string name="login_btn_signup">Sign Up</string>
     <string name="agree_terms">By joining you agree to our <a href="http://www.wolox.com.ar">Terms &amp; Conditions </a></string>

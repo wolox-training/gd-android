@@ -8,7 +8,10 @@ import ar.com.wolox.android.example.ui.home.HomeFragment
 import ar.com.wolox.android.example.ui.login.LoginFragment
 import ar.com.wolox.android.example.ui.login.RegisterActivity
 import ar.com.wolox.android.example.ui.login.RootActivity
+import ar.com.wolox.android.example.ui.newsDetail.NewsDetailActivity
+import ar.com.wolox.android.example.ui.newsDetail.NewsDetailFragment
 import ar.com.wolox.android.example.ui.news.NewsFragment
+import ar.com.wolox.android.example.ui.newsDetail.ImageFullScreenActivity
 import ar.com.wolox.android.example.ui.profile.ProfileFragment
 
 import dagger.Module
@@ -43,4 +46,13 @@ abstract class AppModule {
 
     @ContributesAndroidInjector
     internal abstract fun profileFragment(): ProfileFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun newsDetailActivity(): NewsDetailActivity
+
+    @ContributesAndroidInjector
+    internal abstract fun newsDetailFragment(): NewsDetailFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun imageFullScreenActivity(): ImageFullScreenActivity
 }

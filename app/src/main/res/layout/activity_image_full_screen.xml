@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/vImageFullScreenImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        tools:targetApi="lollipop"
+        android:scaleType="fitCenter"/>
+
+    <ImageView
+        android:id="@+id/vNewsDetailBackArrow"
+        android:layout_width="@dimen/news_detail_back_arrow_size"
+        android:layout_height="@dimen/news_detail_back_arrow_size"
+        android:layout_margin="@dimen/spacing_large"
+        android:src="@drawable/ic_back_arrow" />
+
+</FrameLayout>
