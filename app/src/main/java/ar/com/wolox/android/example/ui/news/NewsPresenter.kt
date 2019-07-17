@@ -23,7 +23,6 @@ class NewsPresenter @Inject constructor(
     fun getNews() {
 
         val call = retrofitServices!!.getService(NewsService::class.java).getNews()
-
         call.enqueue(object : NetworkCallback<List<News>>() {
             override fun onResponseSuccessful(response: List<News>?) {
 
