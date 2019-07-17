@@ -17,7 +17,7 @@ import ar.com.wolox.android.R
 import ar.com.wolox.android.example.ui.newsDetail.NewsDetailActivity
 
 class NewsViewHolderAdapter(
-        private val listener: NewsAdapterView
+    private val listener: NewsAdapterView
 ) : ListAdapter<News, NewsViewHolderAdapter.ViewHolder>(NewsAdapterCallBack()) {
 
     private var newsList = ArrayList<News>()

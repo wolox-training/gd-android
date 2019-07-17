@@ -13,7 +13,7 @@ import okhttp3.ResponseBody
 import javax.inject.Inject
 
 class NewsDetailPresenter @Inject constructor(
-        private val retrofitServices: RetrofitServices
+    private val retrofitServices: RetrofitServices
 ) : BasePresenter<INewsDetailView>() {
 
     private lateinit var mPrefUserId: String
@@ -77,9 +77,9 @@ class NewsDetailPresenter @Inject constructor(
     }
 
     fun setPreferencesConf(
-            context: Context,
-            prefName: String,
-            prefUserId: String
+        context: Context,
+        prefName: String,
+        prefUserId: String
     ) {
         mPrefName = prefName
         mPrefUserId = prefUserId

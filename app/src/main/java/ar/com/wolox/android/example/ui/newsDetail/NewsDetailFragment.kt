@@ -119,7 +119,7 @@ class NewsDetailFragment @Inject constructor() : WolmoDialogFragment<NewsDetailP
 
     companion object {
         fun instance(
-                news: Serializable
+            news: Serializable
         ): NewsDetailFragment {
             val newDetailsFragment = NewsDetailFragment()
             var bundle = Bundle()
