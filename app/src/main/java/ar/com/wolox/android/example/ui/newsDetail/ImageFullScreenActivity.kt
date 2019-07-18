@@ -1,19 +1,22 @@
 package ar.com.wolox.android.example.ui.newsDetail
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import ar.com.wolox.android.R
-import kotlinx.android.synthetic.main.activity_image_full_screen.*
+import ar.com.wolox.wolmo.core.activity.WolmoActivity
 
-class ImageFullScreenActivity : AppCompatActivity() {
+class ImageFullScreenActivity : WolmoActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_image_full_screen)
+    override fun layout(): Int = R.layout.activity_base
 
-        intent.getStringExtra(IMAGE_URL)?.let { vImageFullScreenImageView.setImageURI(it) }
+    override fun init() {
+        var fragment = ImageFullScreenFragment()
+        var args = Bundle()
+        args.putString(IMAGE_URL, intent.getStringExtra(IMAGE_URL))
 
-        vNewsDetailBackArrow?.setOnClickListener { finish() }
+        fragment.arguments = args
+
+        replaceFragment(R.id.vActivityBaseContent,
+                fragment)
     }
 
     companion object {

@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.ListAdapter
 import ar.com.wolox.android.R
 
 class NewsViewHolderAdapter(
-    private val listener: NewsAdapterView
+        private val listener: NewsAdapterView
 ) : ListAdapter<News, NewsViewHolderAdapter.ViewHolder>(NewsAdapterCallBack()) {
 
     private var newsList = ArrayList<News>()
@@ -27,9 +27,12 @@ class NewsViewHolderAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
         Fresco.initialize(context)
-        view = LayoutInflater.from(parent.context).inflate(R.layout.viewholder_news_item, parent, false)
+        view = LayoutInflater.from(parent.context)
+                .inflate(R.layout.viewholder_news_item, parent, false)
 
-        sharedPref = context.getSharedPreferences(context.resources.getString(R.string.preferences_name), Context.MODE_PRIVATE)
+        sharedPref = context.getSharedPreferences(
+                context.resources.getString(R.string.preferences_name),
+                Context.MODE_PRIVATE)
         return ViewHolder(view)
     }
 

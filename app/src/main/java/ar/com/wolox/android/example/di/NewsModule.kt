@@ -4,6 +4,7 @@ import ar.com.wolox.android.example.ui.newsDetail.NewsDetailActivity
 import ar.com.wolox.android.example.ui.newsDetail.NewsDetailFragment
 import ar.com.wolox.android.example.ui.news.NewsFragment
 import ar.com.wolox.android.example.ui.newsDetail.ImageFullScreenActivity
+import ar.com.wolox.android.example.ui.newsDetail.ImageFullScreenFragment
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -22,4 +23,7 @@ abstract class NewsModule {
 
     @ContributesAndroidInjector
     internal abstract fun imageFullScreenActivity(): ImageFullScreenActivity
+
+    @ContributesAndroidInjector
+    internal abstract fun imageFullScreenFragment(): ImageFullScreenFragment
 }

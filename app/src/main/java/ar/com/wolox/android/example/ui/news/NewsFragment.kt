@@ -61,7 +61,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
 
     fun startNewsDetailActivity(context: Context, news: News) {
         var starter = Intent(context, NewsDetailActivity::class.java)
-        starter.putExtra("news", news)
+        starter.putExtra(NEWS, news)
         context.startActivity(starter)
     }
 
@@ -87,5 +87,9 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
 
     override fun onItemClick(news: News) {
         context?.let { startNewsDetailActivity(it, news) }
+    }
+
+    companion object {
+        private const val NEWS = "news"
     }
 }

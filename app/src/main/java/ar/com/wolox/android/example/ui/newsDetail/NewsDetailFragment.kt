@@ -1,12 +1,11 @@
 package ar.com.wolox.android.example.ui.newsDetail
 
+import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import ar.com.wolox.android.R
 import ar.com.wolox.android.example.model.News
-import ar.com.wolox.android.example.ui.newsDetail.ImageFullScreenActivity.Companion.IMAGE_URL
 import ar.com.wolox.wolmo.core.fragment.WolmoDialogFragment
 import kotlinx.android.synthetic.main.fragment_news.*
 import kotlinx.android.synthetic.main.fragment_news_detail.*
@@ -31,9 +30,7 @@ class NewsDetailFragment @Inject constructor() : WolmoDialogFragment<NewsDetailP
         }
 
         vNewsDetailPicture.setOnClickListener() {
-            val imageFullScreenIntent = Intent(activity, ImageFullScreenActivity::class.java)
-            imageFullScreenIntent.putExtra(IMAGE_URL, news.picture)
-            startActivity(imageFullScreenIntent)
+            startFullScreenImage(activity!!, news.picture)
         }
 
         vNewsDetailBackArrow.setOnClickListener { activity?.onBackPressed() }
@@ -52,9 +49,7 @@ class NewsDetailFragment @Inject constructor() : WolmoDialogFragment<NewsDetailP
     }
 
     private fun loadIntentData() {
-        activity?.let { ctx ->
-            val news = ctx.intent?.extras?.get("news") as News?
-        }
+        val news = arguments!!.getSerializable(NEWS) as News
     }
 
     override fun getPost(post: News) {
@@ -74,7 +69,7 @@ class NewsDetailFragment @Inject constructor() : WolmoDialogFragment<NewsDetailP
     }
 
     private fun loadNewsDetails() {
-        news = arguments!!.getSerializable("news") as News
+        news = arguments!!.getSerializable(NEWS) as News
         vNewsDetailTitle.text = news.title
         vNewsDetailText.text = news.text
         vNewsDetailTimeAgo.text = news.getTimeFormated()
@@ -90,15 +85,14 @@ class NewsDetailFragment @Inject constructor() : WolmoDialogFragment<NewsDetailP
         Toast.makeText(context, resources.getString(R.string.login_error_service), Toast.LENGTH_SHORT).show()
     }
 
+    fun startFullScreenImage(context: Context, image: String) {
+        var starter = Intent(context, ImageFullScreenActivity::class.java)
+        starter.putExtra(IMAGE_URL, image)
+        context.startActivity(starter)
+    }
+
     companion object {
-        fun instance(
-            intent: Intent
-        ): NewsDetailFragment {
-            val newDetailsFragment = NewsDetailFragment()
-            var bundle = Bundle()
-            bundle.putSerializable("news", intent.getSerializableExtra("news"))
-            newDetailsFragment.arguments = bundle
-            return newDetailsFragment
-        }
+        const val NEWS = "news"
+        const val IMAGE_URL = "image_url"
     }
 }

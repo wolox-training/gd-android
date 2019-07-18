@@ -13,7 +13,7 @@ import okhttp3.ResponseBody
 import javax.inject.Inject
 
 class NewsDetailPresenter @Inject constructor(
-    private val retrofitServices: RetrofitServices
+        private val retrofitServices: RetrofitServices
 ) : BasePresenter<INewsDetailView>() {
 
     private lateinit var sharedPrefUserId: String
@@ -22,24 +22,23 @@ class NewsDetailPresenter @Inject constructor(
 
     fun getPost(id: Int) {
 
-        val call = retrofitServices!!.getService(NewsService::class.java).getPostById(id)
+        retrofitServices!!.getService(NewsService::class.java).getPostById(id)
+                .enqueue(object : NetworkCallback<News>() {
+                    override fun onResponseSuccessful(response: News?) {
 
-        call.enqueue(object : NetworkCallback<News>() {
-            override fun onResponseSuccessful(response: News?) {
+                        if (response != null) {
+                            view.getPost(response)
+                        }
+                    }
 
-                if (response != null) {
-                    view.getPost(response)
-                }
-            }
+                    override fun onResponseFailed(responseBody: ResponseBody?, code: Int) {
+                        view.showAPIError(R.string.news_error_api)
+                    }
 
-            override fun onResponseFailed(responseBody: ResponseBody?, code: Int) {
-                view.showAPIError(R.string.news_error_api)
-            }
-
-            override fun onCallFailure(t: Throwable) {
-                view.showAPIError(R.string.news_error_api)
-            }
-        })
+                    override fun onCallFailure(t: Throwable) {
+                        view.showAPIError(R.string.news_error_api)
+                    }
+                })
     }
 
     fun toggleLike(post: News?) {
@@ -57,27 +56,26 @@ class NewsDetailPresenter @Inject constructor(
 
     private fun callToggleLike(likes: List<Int>?, newsId: Int, like: Boolean) {
 
-        val call = newsId.let { retrofitServices.getService(NewsService::class.java).toogleLike(NewsLikes(likes), it) }
+        retrofitServices.getService(NewsService::class.java).toogleLike(NewsLikes(likes), newsId)
+                .enqueue(object : NetworkCallback<News>() {
+                    override fun onResponseSuccessful(response: News?) {
+                        view.onToggleSuccess(like)
+                    }
 
-        call.enqueue(object : NetworkCallback<News>() {
-            override fun onResponseSuccessful(response: News?) {
-                view.onToggleSuccess(like)
-            }
+                    override fun onResponseFailed(responseBody: ResponseBody?, code: Int) {
+                        view.showAPIError(R.string.news_error_api)
+                    }
 
-            override fun onResponseFailed(responseBody: ResponseBody?, code: Int) {
-                view.showAPIError(R.string.news_error_api)
-            }
-
-            override fun onCallFailure(t: Throwable) {
-                view.showAPIError(R.string.news_error_api)
-            }
-        })
+                    override fun onCallFailure(t: Throwable) {
+                        view.showAPIError(R.string.news_error_api)
+                    }
+                })
     }
 
     fun setPreferencesConf(
-        context: Context,
-        prefName: String,
-        prefUserId: String
+            context: Context,
+            prefName: String,
+            prefUserId: String
     ) {
         sharedPrefName = prefName
         sharedPrefUserId = prefUserId
