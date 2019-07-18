@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.ListAdapter
 import ar.com.wolox.android.R
 
 class NewsViewHolderAdapter(
-        private val listener: NewsAdapterView
+    private val listener: NewsAdapterView
 ) : ListAdapter<News, NewsViewHolderAdapter.ViewHolder>(NewsAdapterCallBack()) {
 
     private var newsList = ArrayList<News>()
