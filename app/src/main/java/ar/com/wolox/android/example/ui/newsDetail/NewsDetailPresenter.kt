@@ -16,8 +16,8 @@ class NewsDetailPresenter @Inject constructor(
     private val retrofitServices: RetrofitServices
 ) : BasePresenter<INewsDetailView>() {
 
-    private lateinit var mPrefUserId: String
-    private lateinit var mPrefName: String
+    private lateinit var sharedPrefUserId: String
+    private lateinit var sharedPrefName: String
     internal lateinit var sharedPref: SharedPreferences
 
     fun getPost(id: Int) {
@@ -43,7 +43,7 @@ class NewsDetailPresenter @Inject constructor(
     }
 
     fun toggleLike(post: News?) {
-        val currentUserId = sharedPref.getInt(mPrefUserId, 0)
+        val currentUserId = sharedPref.getInt(sharedPrefUserId, 0)
         var like = false
         if (post?.likes?.contains(currentUserId) == true) {
             (post.likes as ArrayList).remove(currentUserId)
@@ -55,25 +55,23 @@ class NewsDetailPresenter @Inject constructor(
         callToggleLike(post.likes, post.id, like)
     }
 
-    private fun callToggleLike(likes: List<Int>?, newsId: Int?, like: Boolean) {
+    private fun callToggleLike(likes: List<Int>?, newsId: Int, like: Boolean) {
 
-        val call = newsId?.let { retrofitServices!!.getService(NewsService::class.java).toogleLike(NewsLikes(likes), it) }
+        val call = newsId.let { retrofitServices.getService(NewsService::class.java).toogleLike(NewsLikes(likes), it) }
 
-        if (call != null) {
-            call.enqueue(object : NetworkCallback<News>() {
-                override fun onResponseSuccessful(response: News?) {
-                    view.onToggleSuccess(like)
-                }
+        call.enqueue(object : NetworkCallback<News>() {
+            override fun onResponseSuccessful(response: News?) {
+                view.onToggleSuccess(like)
+            }
 
-                override fun onResponseFailed(responseBody: ResponseBody?, code: Int) {
-                    view.showAPIError(R.string.news_error_api)
-                }
+            override fun onResponseFailed(responseBody: ResponseBody?, code: Int) {
+                view.showAPIError(R.string.news_error_api)
+            }
 
-                override fun onCallFailure(t: Throwable) {
-                    view.showAPIError(R.string.news_error_api)
-                }
-            })
-        }
+            override fun onCallFailure(t: Throwable) {
+                view.showAPIError(R.string.news_error_api)
+            }
+        })
     }
 
     fun setPreferencesConf(
@@ -81,9 +79,9 @@ class NewsDetailPresenter @Inject constructor(
         prefName: String,
         prefUserId: String
     ) {
-        mPrefName = prefName
-        mPrefUserId = prefUserId
+        sharedPrefName = prefName
+        sharedPrefUserId = prefUserId
 
-        sharedPref = context.getSharedPreferences(mPrefName, Context.MODE_PRIVATE)
+        sharedPref = context.getSharedPreferences(sharedPrefName, Context.MODE_PRIVATE)
     }
 }

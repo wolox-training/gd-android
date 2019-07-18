@@ -56,25 +56,23 @@ class NewsPresenter @Inject constructor(
         callToggleLike(post.likes, post.id, like)
     }
 
-    private fun callToggleLike(likes: List<Int>?, newsId: Int?, like: Boolean) {
+    private fun callToggleLike(likes: List<Int>?, newsId: Int, like: Boolean) {
 
-        val call = newsId?.let { retrofitServices!!.getService(NewsService::class.java).toogleLike(NewsLikes(likes), it) }
+        val call = newsId.let { retrofitServices.getService(NewsService::class.java).toogleLike(NewsLikes(likes), it) }
 
-        if (call != null) {
-            call.enqueue(object : NetworkCallback<News>() {
-                override fun onResponseSuccessful(response: News?) {
-                    view.onToggleSuccess(like)
-                }
+        call.enqueue(object : NetworkCallback<News>() {
+            override fun onResponseSuccessful(response: News?) {
+                view.onToggleSuccess(like)
+            }
 
-                override fun onResponseFailed(responseBody: ResponseBody?, code: Int) {
-                    view.showAPIError(R.string.news_error_api)
-                }
+            override fun onResponseFailed(responseBody: ResponseBody?, code: Int) {
+                view.showAPIError(R.string.news_error_api)
+            }
 
-                override fun onCallFailure(t: Throwable) {
-                    view.showAPIError(R.string.news_error_api)
-                }
-            })
-        }
+            override fun onCallFailure(t: Throwable) {
+                view.showAPIError(R.string.news_error_api)
+            }
+        })
     }
 
     fun setPreferencesConf(

@@ -13,7 +13,7 @@ class ImageFullScreenActivity : AppCompatActivity() {
 
         intent.getStringExtra(IMAGE_URL)?.let { vImageFullScreenImageView.setImageURI(it) }
 
-        vImageFullScreenImageView?.setOnClickListener { finish() }
+        vNewsDetailBackArrow?.setOnClickListener { finish() }
     }
 
     companion object {

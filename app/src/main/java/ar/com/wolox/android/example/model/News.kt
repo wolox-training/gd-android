@@ -8,15 +8,12 @@ import java.io.Serializable
 
 data class News(
     var id: Int,
-    @SerializedName("userId")
-    var userId: Int,
-    @SerializedName("createdAt")
-    var createdAt: String,
+    @SerializedName("userId") var userId: Int,
+    @SerializedName("createdAt") var createdAt: String,
     var title: String,
     var picture: String,
     var text: String,
-    @SerializedName("likes")
-    val likes: List<Int>? = null,
+    @SerializedName("likes") val likes: List<Int>? = null,
     var like: Boolean = false
 ) : Serializable {
 

@@ -1,11 +1,13 @@
 package ar.com.wolox.android.example.ui.news
 
+import android.content.Context
 import android.content.Intent
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import ar.com.wolox.android.R
 import ar.com.wolox.android.example.model.News
+import ar.com.wolox.android.example.ui.newsDetail.NewsDetailActivity
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import kotlinx.android.synthetic.main.fragment_news.*
 import kotlinx.android.synthetic.main.fragment_news.view.*
@@ -57,6 +59,12 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
         stopRefreshing()
     }
 
+    fun startNewsDetailActivity(context: Context, news: News) {
+        var starter = Intent(context, NewsDetailActivity::class.java)
+        starter.putExtra("news", news)
+        context.startActivity(starter)
+    }
+
     fun stopRefreshing() {
         vSwipeRefreshNews.isRefreshing = false
     }
@@ -75,5 +83,9 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
 
     override fun onToggleClick(news: News) {
         presenter.toggleLike(news)
+    }
+
+    override fun onItemClick(news: News) {
+        context?.let { startNewsDetailActivity(it, news) }
     }
 }

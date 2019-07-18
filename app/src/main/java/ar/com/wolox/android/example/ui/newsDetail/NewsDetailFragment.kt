@@ -3,39 +3,24 @@ package ar.com.wolox.android.example.ui.newsDetail
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
-import android.widget.ToggleButton
-import androidx.appcompat.widget.Toolbar
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import ar.com.wolox.android.R
 import ar.com.wolox.android.example.model.News
 import ar.com.wolox.android.example.ui.newsDetail.ImageFullScreenActivity.Companion.IMAGE_URL
 import ar.com.wolox.wolmo.core.fragment.WolmoDialogFragment
-import com.facebook.drawee.view.SimpleDraweeView
 import kotlinx.android.synthetic.main.fragment_news.*
-import java.io.Serializable
+import kotlinx.android.synthetic.main.fragment_news_detail.*
 import javax.inject.Inject
 
 class NewsDetailFragment @Inject constructor() : WolmoDialogFragment<NewsDetailPresenter>(), INewsDetailView {
 
-    private lateinit var vNewsDetailPicture: SimpleDraweeView
-    private lateinit var vNewsDetailSwipe: SwipeRefreshLayout
-    private lateinit var vNewsDetailTitle: TextView
-    private lateinit var vNewsDetailText: TextView
-    private lateinit var vNewsDetailTimeAgo: TextView
-    private lateinit var vNewsDetailLike: ToggleButton
-    private lateinit var vToolbar: Toolbar
-    private lateinit var vNewsDetailBackArrow: ImageView
     private lateinit var news: News
 
-    override fun layout(): Int = ar.com.wolox.android.R.layout.fragment_news_detail
+    override fun layout(): Int = R.layout.fragment_news_detail
 
     override fun init() {
 
         loadIntentData()
-        bindViews()
         loadNewsDetails()
 
         context?.let {
@@ -97,18 +82,6 @@ class NewsDetailFragment @Inject constructor() : WolmoDialogFragment<NewsDetailP
         vNewsDetailLike.isChecked = news.like
     }
 
-    private fun bindViews() {
-        // vNewsDetailSwipe = activity!!.findViewById(R.id.vNewsDetailSwipe)
-        vNewsDetailTitle = activity!!.findViewById(R.id.vNewsDetailTitle)
-        vNewsDetailText = activity!!.findViewById(R.id.vNewsDetailText)
-        vNewsDetailTimeAgo = activity!!.findViewById(R.id.vNewsDetailTimeAgo)
-        vNewsDetailPicture = activity!!.findViewById(R.id.vNewsDetailPicture)
-        vNewsDetailLike = activity!!.findViewById(R.id.vNewsDetailLike)
-        vToolbar = activity!!.findViewById(R.id.vToolbar)
-        vNewsDetailBackArrow = activity!!.findViewById(R.id.vNewsDetailBackArrow)
-        vNewsDetailSwipe = activity!!.findViewById(R.id.vNewsDetailSwipe)
-    }
-
     override fun onToggleSuccess(like: Boolean) {
         vNewsDetailLike?.isSelected = like
     }
@@ -119,11 +92,11 @@ class NewsDetailFragment @Inject constructor() : WolmoDialogFragment<NewsDetailP
 
     companion object {
         fun instance(
-            news: Serializable
+            intent: Intent
         ): NewsDetailFragment {
             val newDetailsFragment = NewsDetailFragment()
             var bundle = Bundle()
-            bundle.putSerializable("news", news)
+            bundle.putSerializable("news", intent.getSerializableExtra("news"))
             newDetailsFragment.arguments = bundle
             return newDetailsFragment
         }

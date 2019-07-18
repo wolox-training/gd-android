@@ -14,7 +14,6 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.view.SimpleDraweeView
 import androidx.recyclerview.widget.ListAdapter
 import ar.com.wolox.android.R
-import ar.com.wolox.android.example.ui.newsDetail.NewsDetailActivity
 
 class NewsViewHolderAdapter(
     private val listener: NewsAdapterView
@@ -23,8 +22,6 @@ class NewsViewHolderAdapter(
     private var newsList = ArrayList<News>()
     private lateinit var view: View
     private lateinit var context: Context
-    private lateinit var mPrefUserId: String
-    private lateinit var mPrefName: String
     internal lateinit var sharedPref: SharedPreferences
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -64,7 +61,7 @@ class NewsViewHolderAdapter(
             }
 
             vNewsContainer.setOnClickListener {
-                NewsDetailActivity.startNewsDetailActivity(context, news)
+                listener.onItemClick(news)
             }
         }
     }
