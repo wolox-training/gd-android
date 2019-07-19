@@ -129,7 +129,6 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
     implementation "com.google.android.material:material:$androidx_material_version"
 
-
     // Dagger
     implementation "com.google.dagger:dagger:$dagger_version"
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
@@ -167,4 +166,5 @@ dependencies {
 
     //Pretty time
     implementation "org.ocpsoft.prettytime:prettytime:$prettytime"
+
 }

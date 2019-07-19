@@ -11,5 +11,6 @@
     <color name="gray">#666666</color>
     <color name="light_gray">#AAAAAA</color>
     <color name="super_light_gray">#DDDDDD</color>
+    <color name="transparent">#00000000</color>
 
 </resources>

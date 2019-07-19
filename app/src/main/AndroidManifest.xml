@@ -34,6 +34,14 @@
         <activity
             android:name=".example.ui.home.HomeActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".example.ui.newsDetail.NewsDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".example.ui.newsDetail.ImageFullScreenActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>
