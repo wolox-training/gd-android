@@ -7,16 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.view.SimpleDraweeView
 import com.google.api.services.youtube.model.SearchResult
-import kotlinx.android.synthetic.main.viewholder_youtube_list_item.view.*
 
 class YoutubeListViewHolderAdapter(
     private val listener: YoutubeVideoAdapterView
-) : RecyclerView.Adapter<YoutubeListViewHolderAdapter.ViewHolder>() {
+) : ListAdapter<SearchResult, YoutubeListViewHolderAdapter.ViewHolder>(YoutubeVideoAdapterCallBack()) {
 
     private var videoList = ArrayList<SearchResult>()
     private lateinit var view: View

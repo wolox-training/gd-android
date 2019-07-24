@@ -31,8 +31,6 @@ class YoutubePresenter @Inject constructor() : BasePresenter<IYoutubeView>() {
             }
         }
 
-        isLoading = true
-
         Thread {
             try {
                 val result = search.execute()
