@@ -58,5 +58,8 @@
     <dimen name="news_absolute_y_nonews">350dp</dimen>
     <dimen name="news_detail_picture_size">380dp</dimen>
     <dimen name="news_detail_back_arrow_size">50dp</dimen>
+    <dimen name="youtube_search_size">280dp</dimen>
+    <dimen name="youtube_video_info_size">280dp</dimen>
+
 
 </resources>

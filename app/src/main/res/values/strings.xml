@@ -48,6 +48,13 @@
     <string name="news_error_api">Error while loading news. try again later</string>
     <string name="news_empty">No news to show</string>
 
+    <!-- Youtube -->
+    <string name="youtube_api_key">AIzaSyDwHcvJkhnC_Jv183q1BbO3OBmVpirpmD8</string>
+    <string name="youtube_search_button">Search</string>
+    <string name="youtube_search_textbox_hint">Search</string>
+    <string name="youtube_title">Title</string>
+    <string name="youtube_description">Description</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

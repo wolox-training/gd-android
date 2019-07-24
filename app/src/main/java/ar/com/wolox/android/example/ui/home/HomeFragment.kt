@@ -3,7 +3,7 @@ package ar.com.wolox.android.example.ui.home
 import androidx.core.util.Pair
 import androidx.fragment.app.Fragment
 import ar.com.wolox.android.example.ui.news.NewsFragment
-import ar.com.wolox.android.example.ui.profile.ProfileFragment
+import ar.com.wolox.android.example.ui.youtube.YoutubeFragment
 import ar.com.wolox.wolmo.core.adapter.viewpager.SimpleFragmentPagerAdapter
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
@@ -21,7 +21,7 @@ class HomeFragment @javax.inject.Inject constructor() : WolmoFragment<BasePresen
     @Inject
     internal lateinit var newsFragment: NewsFragment
     @Inject
-    internal lateinit var profileFragment: ProfileFragment
+    internal lateinit var mYoutubeFragment: YoutubeFragment
     private lateinit var fragmentPagerAdapter: SimpleFragmentPagerAdapter
 
     override fun layout(): Int = R.layout.fragment_home
@@ -38,7 +38,7 @@ class HomeFragment @javax.inject.Inject constructor() : WolmoFragment<BasePresen
         fragmentPagerAdapter = SimpleFragmentPagerAdapter(childFragmentManager)
         fragmentPagerAdapter.addFragments(
                 Pair<Fragment, String>(newsFragment, getString(R.string.home_news_title)),
-                Pair<Fragment, String>(profileFragment, getString(R.string.home_profile_title)))
+                Pair<Fragment, String>(mYoutubeFragment, getString(R.string.home_profile_title)))
         vViewPager.adapter = fragmentPagerAdapter
 
         vHomeTabs.apply {
