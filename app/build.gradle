@@ -175,12 +175,12 @@ dependencies {
 
     // Google play services
     implementation "com.google.android.gms:play-services-auth:$google_play_services_version"
-    implementation('com.google.api-client:google-api-client-android:1.25.0') {
+    implementation("com.google.api-client:google-api-client-android:$youtube_android_client") {
         exclude group: 'org.apache.httpcomponents'
     }
 
     // Youtube
-    implementation('com.google.apis:google-api-services-youtube:v3-rev206-1.25.0') {
+    implementation("com.google.apis:google-api-services-youtube:$youtube_service") {
         exclude group: 'org.apache.httpcomponents'
     }
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
