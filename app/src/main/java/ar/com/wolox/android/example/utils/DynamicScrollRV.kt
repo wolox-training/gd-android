@@ -29,7 +29,7 @@ abstract class DynamicScrollRV(val performAction: () -> Unit) : RecyclerView.OnS
      */
     abstract fun hasMore(): Boolean
 
-    companion object{
+    companion object {
         const val CERO = 0
     }
 }
