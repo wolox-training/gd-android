@@ -2,7 +2,6 @@ package ar.com.wolox.android.example.ui.youtube
 
 import android.content.Context
 import android.content.Intent
-import androidx.annotation.NonNull
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
@@ -71,8 +70,8 @@ class YoutubeFragment @Inject constructor() : WolmoFragment<YoutubePresenter>(),
         vYoutubeRecyclerView.post { toastFactory.showLong(R.string.youtube_api_error) }
     }
 
-    override fun onItemClick(@NonNull result: SearchResult) {
-        context?.let { startOpenVideoActivity(it, result) }
+    override fun onItemClick(result: SearchResult) {
+        startOpenVideoActivity(requireContext(), result)
     }
 
     fun startOpenVideoActivity(context: Context, result: SearchResult) {

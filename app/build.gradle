@@ -132,6 +132,7 @@ dependencies {
     implementation "androidx.legacy:legacy-support-v4:$legacy_support_v4"
     implementation "androidx.appcompat:appcompat:$appcompat"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
+    implementation "com.android.support:appcompat-v7:$support_library_version"
     implementation "com.google.android.material:material:$androidx_material_version"
 
     // Dagger
@@ -174,12 +175,11 @@ dependencies {
 
     // Google play services
     implementation "com.google.android.gms:play-services-auth:$google_play_services_version"
-
-    // Youtube
-    implementation "com.android.support:appcompat-v7:$support_library_version"
     implementation('com.google.api-client:google-api-client-android:1.25.0') {
         exclude group: 'org.apache.httpcomponents'
     }
+
+    // Youtube
     implementation('com.google.apis:google-api-services-youtube:v3-rev206-1.25.0') {
         exclude group: 'org.apache.httpcomponents'
     }

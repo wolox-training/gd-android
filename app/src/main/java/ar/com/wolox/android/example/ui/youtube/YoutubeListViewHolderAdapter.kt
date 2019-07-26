@@ -4,14 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
 import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.drawee.view.SimpleDraweeView
 import com.google.api.services.youtube.model.SearchResult
 import androidx.recyclerview.widget.ListAdapter
+import kotlinx.android.synthetic.main.viewholder_youtube_list_item.view.*
 
 class YoutubeListViewHolderAdapter(
     private val listener: YoutubeVideoAdapterView
@@ -61,9 +59,9 @@ class YoutubeListViewHolderAdapter(
     }
 
     class ViewHolder(item: View) : RecyclerView.ViewHolder(item) {
-        var vYoutubeVideoBody = item.findViewById<TextView>(R.id.vYoutubeVideoBody)
-        var vYoutubeVideoTitle = item.findViewById<TextView>(R.id.vYoutubeVideoTitle)
-        var vYoutubeVideoImage = item.findViewById<SimpleDraweeView>(R.id.vYoutubeVideoImage)
-        var vYoutubeVideoContainer = item.findViewById<ConstraintLayout>(R.id.vYoutubeVideoContainer)
+        var vYoutubeVideoBody = item.vYoutubeVideoBody
+        var vYoutubeVideoTitle = item.vYoutubeVideoTitle
+        var vYoutubeVideoImage = item.vYoutubeVideoImage
+        var vYoutubeVideoContainer = item.vYoutubeVideoContainer
     }
 }

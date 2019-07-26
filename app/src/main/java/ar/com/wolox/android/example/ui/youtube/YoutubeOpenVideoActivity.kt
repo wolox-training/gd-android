@@ -36,8 +36,7 @@ class YoutubeOpenVideoActivity : WolmoActivity(), YouTubePlayer.OnInitializedLis
     override fun onInitializationFailure(
         provider: YouTubePlayer.Provider?,
         result: YouTubeInitializationResult?
-    ) =
-            toastFactory.showLong(R.string.unknown_error)
+    ) = toastFactory.showLong(R.string.unknown_error)
 
     private fun requiredArguments() = intent.extras!!
 
