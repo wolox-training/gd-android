@@ -31,25 +31,27 @@ class YoutubePresenter @Inject constructor() : BasePresenter<IYoutubeView>() {
             }
         }
 
-        Thread {
+        isLoading = true
+
+        Thread(Runnable {
             try {
                 val result = search.execute()
 
                 runIfViewAttached { IYoutubeView ->
                     if (result == null) {
                         view.setVideoList(mutableListOf())
+                        return@runIfViewAttached
                     } else {
                         nextPageToken = result.nextPageToken
 
                         if (paginated) {
-                            view.appendResults(result.items)
+                            view.appendVideos(result.items)
                         } else {
                             view.setVideoList(result.items)
                         }
                     }
                 }
             } catch (error: Exception) {
-                Log.wtf("CATCH", "Error: " + error.message)
                 runIfViewAttached { iYouTubeSearchView ->
                     when (error) {
                         is UnknownHostException -> view.showAPIError()
@@ -59,7 +61,7 @@ class YoutubePresenter @Inject constructor() : BasePresenter<IYoutubeView>() {
             } finally {
                 isLoading = false
             }
-        }.start()
+        }).start()
     }
 
     fun hasMore() = nextPageToken != null
@@ -68,16 +70,6 @@ class YoutubePresenter @Inject constructor() : BasePresenter<IYoutubeView>() {
 
     companion object {
         private const val MAX_VIDEOS = 10L
-        private const val TAG = "mYouTube"
     }
 
-/*
-    fun getVideos() {
-        var video: VideoYoutube = VideoYoutube(1, "titulo 1", "descripcion 1", "http://bucket1.glanacion.com/anexos/fotos/70/dia-del-amigo-2236070w620.jpg")
-        var videos: MutableList<VideoYoutube>
-        videos = mutableListOf(video, video, video, video)
-
-        view.setVideoList(videos)
-    }
-    */
 }

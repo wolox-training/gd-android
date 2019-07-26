@@ -1,21 +1,20 @@
 package ar.com.wolox.android.example.ui.youtube
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.view.SimpleDraweeView
 import com.google.api.services.youtube.model.SearchResult
+import androidx.recyclerview.widget.ListAdapter
 
 class YoutubeListViewHolderAdapter(
-    private val listener: YoutubeVideoAdapterView
+        private val listener: YoutubeVideoAdapterView
 ) : ListAdapter<SearchResult, YoutubeListViewHolderAdapter.ViewHolder>(YoutubeVideoAdapterCallBack()) {
 
     private var videoList = ArrayList<SearchResult>()
@@ -34,8 +33,13 @@ class YoutubeListViewHolderAdapter(
     fun setVideos(videos: MutableList<SearchResult>) {
         videoList = ArrayList()
         videoList.addAll(videos)
-        Log.wtf("adapter", videoList.get(2).snippet.title)
         notifyDataSetChanged()
+    }
+
+    fun appendVideos(videos: MutableList<SearchResult>) {
+        val oldItemCount = itemCount
+        videoList.addAll(videos)
+        notifyItemRangeInserted(oldItemCount, itemCount)
     }
 
     override fun getItemCount(): Int {
@@ -45,15 +49,13 @@ class YoutubeListViewHolderAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val video = videoList[position]
 
-        Log.wtf("BIND", "onBindViewHolder")
-
         holder.run {
             vYoutubeVideoTitle.text = video.snippet.title
             vYoutubeVideoBody.text = video.snippet.description
             vYoutubeVideoImage.setImageURI(video.snippet.thumbnails.default.url)
 
             vYoutubeVideoContainer.setOnClickListener {
-                listener.onItemClick()
+                listener.onItemClick(video)
             }
         }
     }

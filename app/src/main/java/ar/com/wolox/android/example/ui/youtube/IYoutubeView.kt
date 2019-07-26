@@ -9,5 +9,5 @@ interface IYoutubeView {
 
     fun showAPIError()
 
-    fun appendResults(@NonNull videos: MutableList<SearchResult>)
+    fun appendVideos(@NonNull videos: MutableList<SearchResult>)
 }

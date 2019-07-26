@@ -54,6 +54,8 @@
     <string name="youtube_search_textbox_hint">Search</string>
     <string name="youtube_title">Title</string>
     <string name="youtube_description">Description</string>
+    <string name="youtube_no_videos_found">No results found. Try different keywords or remove search filters</string>
+    <string name="youtube_api_error">Error while loading videos. try again later</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
