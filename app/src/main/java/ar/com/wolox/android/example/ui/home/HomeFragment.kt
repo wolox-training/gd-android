@@ -38,7 +38,7 @@ class HomeFragment @javax.inject.Inject constructor() : WolmoFragment<BasePresen
         fragmentPagerAdapter = SimpleFragmentPagerAdapter(childFragmentManager)
         fragmentPagerAdapter.addFragments(
                 Pair<Fragment, String>(newsFragment, getString(R.string.home_news_title)),
-                Pair<Fragment, String>(mYoutubeFragment, getString(R.string.home_profile_title)))
+                Pair<Fragment, String>(mYoutubeFragment, getString(R.string.home_videos_title)))
         vViewPager.adapter = fragmentPagerAdapter
 
         vHomeTabs.apply {

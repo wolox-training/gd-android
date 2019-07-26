@@ -1,6 +1,5 @@
 package ar.com.wolox.android.example.ui.youtube
 
-import android.util.Log
 import androidx.annotation.NonNull
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
 import com.google.api.client.extensions.android.http.AndroidHttp
@@ -71,5 +70,4 @@ class YoutubePresenter @Inject constructor() : BasePresenter<IYoutubeView>() {
     companion object {
         private const val MAX_VIDEOS = 10L
     }
-
 }

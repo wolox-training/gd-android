@@ -14,7 +14,7 @@ import com.google.api.services.youtube.model.SearchResult
 import androidx.recyclerview.widget.ListAdapter
 
 class YoutubeListViewHolderAdapter(
-        private val listener: YoutubeVideoAdapterView
+    private val listener: YoutubeVideoAdapterView
 ) : ListAdapter<SearchResult, YoutubeListViewHolderAdapter.ViewHolder>(YoutubeVideoAdapterCallBack()) {
 
     private var videoList = ArrayList<SearchResult>()
