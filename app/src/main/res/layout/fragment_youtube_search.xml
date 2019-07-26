@@ -1,0 +1,33 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ar.com.wolox.android.example.ui.youtube.YoutubeFragment">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/vYoutubeSearchBox"
+        android:layout_width="@dimen/youtube_search_size"
+        android:layout_height="wrap_content"
+        android:hint="@string/youtube_search_textbox_hint"
+        android:layout_margin="@dimen/font_medium_extra"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+        android:id="@+id/vYoutubeSearchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/youtube_search_button"
+        android:layout_margin="@dimen/font_medium_extra"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/vYoutubeRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/vYoutubeSearchBox" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
