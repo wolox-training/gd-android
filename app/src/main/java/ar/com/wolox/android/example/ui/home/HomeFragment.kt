@@ -27,6 +27,7 @@ class HomeFragment @javax.inject.Inject constructor() : WolmoFragment<BasePresen
     override fun layout(): Int = R.layout.fragment_home
 
     override fun init() {
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             requireActivity().window.apply {
                 addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
@@ -37,8 +38,8 @@ class HomeFragment @javax.inject.Inject constructor() : WolmoFragment<BasePresen
 
         fragmentPagerAdapter = SimpleFragmentPagerAdapter(childFragmentManager)
         fragmentPagerAdapter.addFragments(
-                Pair<Fragment, String>(newsFragment, getString(R.string.home_news_title)),
-                Pair<Fragment, String>(mYoutubeFragment, getString(R.string.home_videos_title)))
+            Pair<Fragment, String>(newsFragment, getString(R.string.home_news_title)),
+            Pair<Fragment, String>(mYoutubeFragment, getString(R.string.home_videos_title)))
         vViewPager.adapter = fragmentPagerAdapter
 
         vHomeTabs.apply {

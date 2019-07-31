@@ -173,7 +173,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     @Override
     public void onLoginSuccesfully() {
-        Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeActivity);
+        Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeFragment);
     }
 
     @Override
@@ -193,7 +193,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     @Override
     public void onGetUserByMailFinished(Boolean userIsFound) {
         if (userIsFound) {
-            Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeActivity);
+            Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeFragment);
         } else {
             Toast.makeText(getContext(), getResources().getString(R.string.login_error_credentials), Toast.LENGTH_LONG).show();
         }

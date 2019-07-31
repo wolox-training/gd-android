@@ -189,5 +189,7 @@ dependencies {
     //NAC
     implementation "android.arch.navigation:navigation-fragment:$nac"
     implementation "android.arch.navigation:navigation-ui:$nac"
+    implementation "android.arch.navigation:navigation-fragment-ktx:$nac"
+    implementation "android.arch.navigation:navigation-ui-ktx:$nac"
 
 }
