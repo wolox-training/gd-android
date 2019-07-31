@@ -113,6 +113,7 @@ buildscript {
     ext.youtube_service = 'v3-rev206-1.25.0'
     ext.google_play_services_version = '16.0.1'
     ext.support_library_version = '28.0.0'
+    ext.nac = '1.0.0'
 
 }
 
@@ -184,5 +185,9 @@ dependencies {
         exclude group: 'org.apache.httpcomponents'
     }
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
+
+    //NAC
+    implementation "android.arch.navigation:navigation-fragment:$nac"
+    implementation "android.arch.navigation:navigation-ui:$nac"
 
 }
