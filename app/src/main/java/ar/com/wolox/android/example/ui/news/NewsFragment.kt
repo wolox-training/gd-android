@@ -67,7 +67,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
 
         var starter = Bundle()
         starter.putSerializable(NEWS, news)
-        Navigation.findNavController(view!!).navigate(R.id.action_newsFragment_to_newsDetailFragment, starter)
+        Navigation.findNavController(view!!).navigate(R.id.action_homeFragment_to_newsDetailFragment, starter)
     }
 
     fun stopRefreshing() {

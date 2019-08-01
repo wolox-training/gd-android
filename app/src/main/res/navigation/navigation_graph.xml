@@ -23,26 +23,18 @@
         android:name="ar.com.wolox.android.example.ui.login.RegisterActivity"
         android:label="activity_register"
         tools:layout="@layout/activity_register" />
+
+    <fragment
+        android:id="@+id/newsDetailFragment"
+        android:name="ar.com.wolox.android.example.ui.newsDetail.NewsDetailFragment"
+        android:label="NewsDetailFragment" />
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="ar.com.wolox.android.example.ui.home.HomeFragment"
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_newsDetailFragment"
-            app:destination="@+id/newsFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/newsFragment"
-        android:name="ar.com.wolox.android.example.ui.news.NewsFragment"
-        android:label="NewsFragment" >
-        <action
-            android:id="@+id/action_newsFragment_to_newsDetailFragment"
             app:destination="@id/newsDetailFragment" />
     </fragment>
-
-    <fragment
-        android:id="@+id/newsDetailFragment"
-        android:name="ar.com.wolox.android.example.ui.newsDetail.NewsDetailFragment"
-        android:label="NewsDetailFragment" />
 </navigation>
