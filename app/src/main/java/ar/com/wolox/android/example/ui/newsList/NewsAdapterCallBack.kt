@@ -1,4 +1,4 @@
-package ar.com.wolox.android.example.ui.news
+package ar.com.wolox.android.example.ui.newsList
 
 import androidx.recyclerview.widget.DiffUtil
 import ar.com.wolox.android.example.model.News

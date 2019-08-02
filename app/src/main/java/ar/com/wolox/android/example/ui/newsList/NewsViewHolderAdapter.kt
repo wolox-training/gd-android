@@ -1,4 +1,4 @@
-package ar.com.wolox.android.example.ui.news
+package ar.com.wolox.android.example.ui.newsList
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -54,7 +54,7 @@ class NewsViewHolderAdapter(
         holder.apply {
             vNewsTitle.text = news.title
             vNewsBody.text = news.text
-            vTimeAgo.text = news.getTimeFormated()
+            vTimeAgo.text = "5min" // news.getTimeFormated()
             vNewsImage.setImageURI(news.picture)
             vFavButton.isChecked = news.like
 

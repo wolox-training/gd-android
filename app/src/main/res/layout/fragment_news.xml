@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ar.com.wolox.android.example.ui.news.NewsFragment">
+    tools:context="ar.com.wolox.android.example.ui.newsList.NewsFragment">
 
     <TextView
         android:id="@+id/vNoNewsText"

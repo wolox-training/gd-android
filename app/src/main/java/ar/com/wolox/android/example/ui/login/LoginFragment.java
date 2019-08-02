@@ -13,9 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.navigation.Navigation;
 
 import ar.com.wolox.android.R;
-import ar.com.wolox.android.example.ui.home.HomeActivity;
 import ar.com.wolox.android.example.ui.viewpager.ViewPagerActivity;
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment;
 import butterknife.BindView;
@@ -176,9 +176,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     @Override
     public void onLoginSuccesfully() {
-        Intent intent = new Intent(getActivity(), HomeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+        Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeFragment);
     }
 
     @Override
@@ -198,8 +196,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     @Override
     public void onGetUserByMailFinished(Boolean userIsFound) {
         if (userIsFound) {
-            Intent intent = new Intent(getActivity(), HomeActivity.class);
-            startActivity(intent);
+            Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeFragment);
         } else {
             Toast.makeText(getContext(), getResources().getString(R.string.login_error_credentials), Toast.LENGTH_LONG).show();
         }

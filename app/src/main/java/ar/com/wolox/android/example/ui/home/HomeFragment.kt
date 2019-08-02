@@ -2,7 +2,7 @@ package ar.com.wolox.android.example.ui.home
 
 import androidx.core.util.Pair
 import androidx.fragment.app.Fragment
-import ar.com.wolox.android.example.ui.news.NewsFragment
+import ar.com.wolox.android.example.ui.newsList.NewsFragment
 import ar.com.wolox.android.example.ui.youtube.YoutubeFragment
 import ar.com.wolox.wolmo.core.adapter.viewpager.SimpleFragmentPagerAdapter
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
@@ -16,29 +16,28 @@ import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import ar.com.wolox.android.R
 
-class HomeFragment @javax.inject.Inject constructor() : WolmoFragment<BasePresenter<Any>>() {
+class HomeFragment @Inject constructor() : WolmoFragment<BasePresenter<Any>>() {
 
-    @Inject
-    internal lateinit var newsFragment: NewsFragment
-    @Inject
-    internal lateinit var mYoutubeFragment: YoutubeFragment
+    @Inject internal lateinit var newsFragment: NewsFragment
+    @Inject internal lateinit var mYoutubeFragment: YoutubeFragment
     private lateinit var fragmentPagerAdapter: SimpleFragmentPagerAdapter
 
     override fun layout(): Int = R.layout.fragment_home
 
     override fun init() {
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             requireActivity().window.apply {
                 addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-                statusBarColor = ContextCompat.getColor(activity!!.baseContext, android.R.color.transparent)
+                statusBarColor = ContextCompat.getColor(requireActivity().baseContext, android.R.color.transparent)
                 setBackgroundDrawableResource(R.drawable.gradient_background_wolox)
             }
         }
 
         fragmentPagerAdapter = SimpleFragmentPagerAdapter(childFragmentManager)
         fragmentPagerAdapter.addFragments(
-                Pair<Fragment, String>(newsFragment, getString(R.string.home_news_title)),
-                Pair<Fragment, String>(mYoutubeFragment, getString(R.string.home_videos_title)))
+            Pair<Fragment, String>(newsFragment, getString(R.string.home_news_title)),
+            Pair<Fragment, String>(mYoutubeFragment, getString(R.string.home_videos_title)))
         vViewPager.adapter = fragmentPagerAdapter
 
         vHomeTabs.apply {
