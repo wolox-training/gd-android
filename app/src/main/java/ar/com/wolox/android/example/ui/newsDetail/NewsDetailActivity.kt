@@ -14,7 +14,6 @@ class NewsDetailActivity : WolmoActivity() {
 
         var fragment = NewsDetailFragment()
         var args = Bundle()
-        // args.putSerializable(NEWS, intent.getSerializableExtra(NEWS))
         args.putSerializable(NEWS, args.getSerializable(NEWS))
 
         fragment.arguments = args

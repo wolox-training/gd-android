@@ -8,7 +8,7 @@ import ar.com.wolox.android.example.utils.requireNavController
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import javax.inject.Inject
 
-class RootFragment @Inject constructor() : WolmoFragment<RootPresenter>(), IRootView {
+class RootFragment : WolmoFragment<RootPresenter>(), IRootView {
     lateinit var sharedPref: SharedPreferences
     lateinit var dialog: ProgressDialog
 
@@ -16,7 +16,7 @@ class RootFragment @Inject constructor() : WolmoFragment<RootPresenter>(), IRoot
 
     override fun init() {
 
-        sharedPref = activity!!.getSharedPreferences(
+        sharedPref = requireActivity().getSharedPreferences(
                 getString(R.string.preferences_name), Context.MODE_PRIVATE)
 
         presenter.setPreferencesConf(context!!,
@@ -37,11 +37,13 @@ class RootFragment @Inject constructor() : WolmoFragment<RootPresenter>(), IRoot
     }
 
     override fun showLoading() {
-        dialog = ProgressDialog(activity)
-        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
-        dialog.setTitle(R.string.login_dialog_title)
-        dialog.setMessage(getString(R.string.login_dialog_message))
-        dialog.show()
+        dialog.apply {
+            ProgressDialog(activity)
+            setProgressStyle(ProgressDialog.STYLE_SPINNER)
+            setTitle(R.string.login_dialog_title)
+            setMessage(getString(R.string.login_dialog_message))
+            show()
+        }
     }
 
     override fun dismissLoading() {

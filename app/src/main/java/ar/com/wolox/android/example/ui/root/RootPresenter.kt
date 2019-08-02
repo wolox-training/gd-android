@@ -13,13 +13,13 @@ import okhttp3.ResponseBody
 import javax.inject.Inject
 
 class RootPresenter @Inject constructor(
-    private val mRetrofitServices: RetrofitServices
+    private val retrofitServices: RetrofitServices
 ) : BasePresenter<IRootView>() {
 
-    private var mPrefName: String? = null
-    private var mPrefEmail: String? = null
-    private var mPrefPass: String? = null
-    private var mPrefUserId: String? = null
+    private var sharedPrefName: String? = null
+    private var sharedPrefEmail: String? = null
+    private var sharedPrefPass: String? = null
+    private var sharedPrefUserId: String? = null
 
     internal lateinit var sharedPref: SharedPreferences
 
@@ -27,15 +27,14 @@ class RootPresenter @Inject constructor(
      * connectUser()
      */
     fun connectUser() {
-        val call = mRetrofitServices.getService(UserService::class.java).getUserLogin(mPrefEmail)
+        val call = retrofitServices.getService(UserService::class.java).getUserLogin(sharedPrefEmail)
 
         view.showLoading()
 
         call.enqueue(object : NetworkCallback<List<User>>() {
-
             override fun onResponseSuccessful(response: List<User>?) {
 
-                if (response!!.isEmpty() || response[0].password != mPrefPass) {
+                if (response!!.isEmpty() || response[0].password != sharedPrefPass) {
                     view.dismissLoading()
                     view.openLogin()
                 } else {
@@ -74,12 +73,12 @@ class RootPresenter @Inject constructor(
         prefPass: String,
         prefUserId: String
     ) {
-        sharedPref = context.getSharedPreferences(mPrefName, Context.MODE_PRIVATE)
+        sharedPref = context.getSharedPreferences(sharedPrefName, Context.MODE_PRIVATE)
 
-        mPrefEmail = sharedPref.getString(prefEmail, defValue)
-        mPrefPass = sharedPref.getString(prefPass, defValue)
-        mPrefName = sharedPref.getString(prefName, defValue)
-        mPrefUserId = sharedPref.getString(prefUserId, defValue)
+        sharedPrefEmail = sharedPref.getString(prefEmail, defValue)
+        sharedPrefPass = sharedPref.getString(prefPass, defValue)
+        sharedPrefName = sharedPref.getString(prefName, defValue)
+        sharedPrefUserId = sharedPref.getString(prefUserId, defValue)
     }
 
     companion object {
