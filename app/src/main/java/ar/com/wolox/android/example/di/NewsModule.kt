@@ -2,7 +2,7 @@ package ar.com.wolox.android.example.di
 
 import ar.com.wolox.android.example.ui.newsDetail.NewsDetailActivity
 import ar.com.wolox.android.example.ui.newsDetail.NewsDetailFragment
-import ar.com.wolox.android.example.ui.news.NewsFragment
+import ar.com.wolox.android.example.ui.newsList.NewsFragment
 import ar.com.wolox.android.example.ui.newsDetail.ImageFullScreenActivity
 import ar.com.wolox.android.example.ui.newsDetail.ImageFullScreenFragment
 

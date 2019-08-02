@@ -4,6 +4,7 @@ import ar.com.wolox.android.example.ui.example.ExampleActivity
 import ar.com.wolox.android.example.ui.example.ExampleFragment
 
 import ar.com.wolox.android.example.ui.login.RootActivity
+import ar.com.wolox.android.example.ui.root.RootFragment
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -19,4 +20,7 @@ abstract class AppModule {
 
     @ContributesAndroidInjector
     internal abstract fun rootActivity(): RootActivity
+
+    @ContributesAndroidInjector
+    internal abstract fun rootFragment(): RootFragment
 }

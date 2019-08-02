@@ -129,7 +129,10 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
             @OnClick
             public void onClick(View v) {
-                Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_registerActivity);
+
+                Intent intent = new Intent(getActivity(), RegisterActivity.class);
+                startActivity(intent);
+
             }
         });
 

@@ -1,4 +1,4 @@
-package ar.com.wolox.android.example.ui.news
+package ar.com.wolox.android.example.ui.newsList
 
 import android.content.Context
 import android.content.SharedPreferences
