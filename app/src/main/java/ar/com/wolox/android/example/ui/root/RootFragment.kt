@@ -3,7 +3,6 @@ package ar.com.wolox.android.example.ui.root
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import ar.com.wolox.android.R
 import ar.com.wolox.android.example.utils.requireNavController
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment

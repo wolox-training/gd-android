@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import android.util.Log
 import ar.com.wolox.android.example.model.User
 import ar.com.wolox.android.example.network.UserService
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
